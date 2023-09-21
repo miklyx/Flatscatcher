@@ -11,7 +11,9 @@ exports.getAll = async ctx => {
   }
 };
 
-exports.getStats = async ctx => {
+
+//MOVE TO FLATSMETA
+/* exports.getStats = async ctx => {
   try {
     ctx.body = await flats.getStats();
   } catch (e) {
@@ -26,9 +28,11 @@ exports.updateMeta = async ctx => {
   } catch (e) {
     ctx.status = 500;
   }
-}
+} */
 
-exports.getProfile = async ctx => {
+
+//MOVE TO PROFILE
+/* exports.getProfile = async ctx => {
   try {
     ctx.body = await flats.getProfile();
   } catch (e) {
@@ -36,8 +40,9 @@ exports.getProfile = async ctx => {
     // Further handle your error on the back-end
   }
 }
-
-exports.getProfileMeta = async ctx => {
+ */
+//MOVE TO PROFILE META
+/* exports.getProfileMeta = async ctx => {
   try {
     ctx.body = await flats.getProfileMeta();
   } catch (e) {
@@ -45,11 +50,11 @@ exports.getProfileMeta = async ctx => {
     // Further handle your error on the back-end
   }
 }
+ */
 
+//SOMETHING WEIRD FOR A WHILE
 
-
-
-
+/* 
 exports.post = async ctx => {
   try {
     await flats.set(ctx.request.body);
@@ -58,4 +63,4 @@ exports.post = async ctx => {
     ctx.status = 500;
     // Further handle your error on the back-end
   }
-};
+}; */
