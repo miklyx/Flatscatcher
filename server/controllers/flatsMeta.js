@@ -4,21 +4,35 @@ const flatsMeta = require('../models/flatsMeta');
 
 exports.getStats = async ctx => {
   try {
-    ctx.body = await flatsMeta.getStats();
+    ctx.body = await flatsMeta.getStats(ctx.request.body);
   } catch (e) {
     ctx.status = 500;
     // Further handle your error on the back-end
   }
 };
 
-exports.updateMeta = async ctx => {
+exports.updateLoginMeta = async ctx => {
   try {
-    ctx.body = await flatsMeta.updataMeta();
+    //console.log(ctx.request.body)
+    ctx.body = await flatsMeta.updataLoginMeta(ctx.request.body);
   } catch (e) {
     ctx.status = 500;
   }
 }
+
+exports.updateLogoutMeta = async ctx => {
+  try {
+    ctx.body = await flatsMeta.updateLogoutMeta(ctx.request.body);
+  } catch (e) {
+    ctx.status = 500;
+  }
+}
+
+
+
+exports 
 //SOMETHING WEIRG FOR A WHILE
+/* 
 exports.post = async ctx => {
   try {
     await flatsMeta.set(ctx.request.body);
@@ -27,4 +41,4 @@ exports.post = async ctx => {
     ctx.status = 500;
     // Further handle your error on the back-end
   }
-};
+}; */
