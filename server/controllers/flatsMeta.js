@@ -4,7 +4,8 @@ const flatsMeta = require('../models/flatsMeta');
 
 exports.getStats = async ctx => {
   try {
-    ctx.body = await flatsMeta.getStats(ctx.request.body);
+    const userId = ctx.query.user_id
+    ctx.body = await flatsMeta.getStats({ user_id: userId});
   } catch (e) {
     ctx.status = 500;
     // Further handle your error on the back-end

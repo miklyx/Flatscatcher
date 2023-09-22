@@ -3,9 +3,9 @@ const pool = require('./index');
 
 
 exports.getProfile = async (data) => {
-  console.log(data.user_id)
+  console.log('passeddata = '+data)
   const res = await pool.query('SELECT id, pic_url, first_name, last_name, email, phone from profile where id = $1', [data.user_id]);
-  return res.rows;
+  return res.rows[0];
 };
 
 exports.updateProfile = async (data) => {

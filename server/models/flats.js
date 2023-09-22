@@ -3,7 +3,8 @@ const pool = require('./index');
 
 
 exports.getAll = async () => {
-  const res = await pool.query('SELECT id, image, url, title, price, size, rooms, address FROM clear');
+  const res = await pool.query('SELECT id, image, url, title, price, size, rooms, address FROM clear order by "false" desc');
+  console.log('flatsmodel calles')
   return res.rows;
 };
 //MOVE TO FLATSMETA//

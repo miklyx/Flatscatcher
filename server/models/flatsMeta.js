@@ -4,10 +4,9 @@ const pool = require('./index');
 
 exports.getStats = async (user) => {
   const sql = 'SELECT lag(dttm) over (order by dttm) as lastvisit, total as all,lastcnt as new, applied  FROM flatsmetagg where user_id = $1 ORDER BY dttm desc limit 1'
-  console.log(user.user_id)
   const values = [user.user_id]
   const res = await pool.query(sql, values);
-  return res.rows;
+  return res.rows[0];
 };
 
 exports.updataLoginMeta = async (user) => {
