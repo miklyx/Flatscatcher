@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { View,Text, StyleSheet, TouchableOpacity, Image } from "react-native";
 import moment from "moment";
 
-import { onLogin, getStats } from '../apiService'
+import { onLogin, getStats } from '../apiService';
 
 export default function Profile ({ route, navigation}) {
   const [userData, setUserData] = useState(null);
@@ -19,20 +19,18 @@ export default function Profile ({ route, navigation}) {
   };
 
   const handlePreferences = () => {
-    navigation.navigate('Preferences', { userId, userData, userStats })
-  }
+    navigation.navigate('Preferences', { userId, userData, userStats });
+  };
 
   useEffect(() => {
     onLogin(userId).then((data) => {
-      setUserData(data) 
-      setIsLoaded(true)
+      setUserData(data);
+      setIsLoaded(true);
     });
     getStats(userId).then((data) => {
-      setUserStats(data) 
-      //setIsLoaded(true)
+      setUserStats(data);
     });
   }, [userId]);
-  if (userStats) console.log(userStats) ;
 
   return (
     <View style={styles.container}>

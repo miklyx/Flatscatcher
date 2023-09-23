@@ -1,10 +1,9 @@
-import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
-import Login from './components/Login'
-import List from './components/List'
+import Login from './components/Login';
+import List from './components/List';
 import Profile from './components/Profile';
 import Preferences from './components/Preferences';
 import Map from './components/Map';
@@ -20,22 +19,10 @@ export default function App() {
         <Stack.Screen name="Preferences" component={Preferences} />
         <Stack.Screen name="List" component={List} />
         <Stack.Screen name="Map" component={Map} />
-
-        {/* <View style={styles.container}>
-          <Top />
-          <View class="top">
-            
-          </View>
-          <View class="login">
-            <Login />
-          </View>
-          <Text>main text will be deleted later</Text>
-          <StatusBar style="auto" />
-        </View> */}
       </Stack.Navigator>
     </NavigationContainer>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {

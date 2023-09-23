@@ -7,7 +7,7 @@ export default function Top() {
       <Text style={styles.text}>FLATS CATCHER</Text>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {

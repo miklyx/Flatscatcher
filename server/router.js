@@ -13,7 +13,7 @@ const profileMeta = require('./controllers/profileMeta.js');
 router.get('/flats', flats.getAll);   //ok
 router.get('/stats', flatsMeta.getStats);  //ok 
 router.post('/login', flatsMeta.updateLoginMeta);  //also reloads data  //ok
-router.post('/logout', flatsMeta.updateLogoutMeta) // update when logout //ok
+router.post('/logout', flatsMeta.updateLogoutMeta); // update when logout //ok
 
 
 router.get('/profile', profile.getProfile);  //ok

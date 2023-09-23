@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import { View,Text, StyleSheet, ScrollView, TouchableOpacity } from "react-native";
 import MapView from "react-native-maps";
-import { getFlats } from '../apiService'
+import { getFlats } from '../apiService';
 import { Marker } from "react-native-maps";
 
 export default function Map ({ route }) {
@@ -20,7 +20,7 @@ export default function Map ({ route }) {
   };
 
   const handleApply = () => {
-    alert('Applied!')
+    alert('Applied!');
   };
 
   const markers = [
@@ -71,7 +71,7 @@ export default function Map ({ route }) {
       title: 'Mitte',
       description: 'Mitte flats'
     },
-  ]
+  ];
 
   return (
     <View style={styles.container}>

@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import { View,Text, StyleSheet, ScrollView, TouchableOpacity } from "react-native";
-import { getFlats } from '../apiService'
+import { getFlats } from '../apiService';
 
 export default function List ({ route }) {
   const {userId, userData} = route.params;
@@ -18,7 +18,7 @@ export default function List ({ route }) {
   };
 
   const handleApply = () => {
-    alert('Applied!')
+    alert('Applied!');
   };
 
   return (

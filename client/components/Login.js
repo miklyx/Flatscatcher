@@ -1,25 +1,17 @@
 import React, {Component, useState} from "react";
 import {TextInput, Button, Text, View, StyleSheet, TouchableOpacity, StatusBar} from 'react-native';
 
-import { onLogin } from "../apiService";
-
 import Top from "./Top";
 
 export default function Login({ navigation }) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  //const [userData, setUserData] = useState(null)
 
   const handleLogin = () => {
     
-    const email = username
-    const userId=1
+    const email = username;
+    const userId=1;
 
-    /* onLogin(1).then((data) => {
-      setUserData(data)
-    }); */
-    //console.log('fromlogin'+userData.first_name)
-    //alert(`Logged in as ${username}`);
     navigation.navigate('Profile', { userId, email });
   };
 
@@ -49,7 +41,7 @@ export default function Login({ navigation }) {
       </View>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {

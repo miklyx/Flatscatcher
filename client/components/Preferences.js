@@ -1,34 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { View,Text, StyleSheet, TextInput, TouchableOpacity} from "react-native";
 import moment from "moment";
-import { getStats } from "../apiService";
-
-
 
 export default function Preferences ({ route, navigation}) {
   
   const {userId, userData, userStats} = route.params;
-  const [updatedUsername, setUpdatedUsername] = useState(userData.first_name)
-  console.log(updatedUsername)
+  const [updatedUsername, setUpdatedUsername] = useState(userData.first_name);
   const handleUpdate = () => {
-    alert('updated!')
-    console.log(updatedUsername)
-    console.log(userData)
+    alert('updated!');
+    console.log(updatedUsername);
+    console.log(userData);
   }
-  //console.log(userData)
-  //console.log(userStats)
-  /*useEffect(() => {
-    getStats(userId).then((data) => {
-      //setUserData(data) 
-      setIsLoaded(true)
-    });
-    getStats(userId).then((data) => {
-      setUserStats(data) 
-      //setIsLoaded(true)
-    });
-  }, [userId]);
-  //if (userData) console.log(userData) ;
- */
+  
   return (
     <View style={styles.container}>
       <View style={styles.profile}>

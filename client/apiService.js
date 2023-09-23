@@ -1,4 +1,4 @@
-const URL = /* 'localhost:3003' */'http://10.0.2.2:3003'
+const URL = /* 'localhost:3003' */'http://10.0.2.2:3003'  //this is an address of gateway of virtual device network
 
 export async function onLogin (userId) {
   try {
@@ -6,14 +6,12 @@ export async function onLogin (userId) {
       method: "GET",
       headers: {"Content-Type" : 'application/json'},
     });
-    //console.log('fetch alles')
     const data = await responce.json();
-    //console.log('fromapiservice'+data.first_name)
     return data;
   } catch (e) {
-    console.log(e)
+    console.log(e);
   }
-}
+};
 
 export async function getStats (userId) {
   try {
@@ -21,35 +19,27 @@ export async function getStats (userId) {
       method: "GET",
       headers: {"Content-Type" : 'application/json'},
     });
-    //console.log('fetch alles')
     const data = await responce.json();
-    //console.log('fromapiservice'+data.first_name)
     return data;
   } catch (e) {
-    console.log(e)
+    console.log(e);
   }
-}
+};
 
 export async function getFlats () {
   try {
-    //console.log('try to ger on client apiService')
-    const responce = await fetch(URL+'/flats')//, {
-      //method: "GET",
-      //headers: {"Content-Type" : 'application/json'},
-      //body: JSON.stringify({title: event, date: date, venue: venue})
-    //});
-    //console.log('fetch alles')
+    const responce = await fetch(URL+'/flats')
     const data = await responce.json();
     return data;
   } catch (e) {
-    console.log('this is an catched error',e)
+    console.log('this is an catched error',e);
   }
-}
+};
 
 export async function onLogout () {
   try {
-    console.log('tried')
+    console.log('logged out');
   } catch (e) {
-    console.log(e)
+    console.log(e);
   }
-}
+};

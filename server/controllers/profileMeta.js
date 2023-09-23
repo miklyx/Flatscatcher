@@ -7,9 +7,8 @@ exports.getProfileMeta = async ctx => {
     ctx.body = await profileMeta.getProfileMeta(ctx.request.body);
   } catch (e) {
     ctx.status = 500;
-    // Further handle your error on the back-end
   }
-}
+};
 
 exports.updateProfileMeta = async ctx => {
   try {
@@ -17,9 +16,8 @@ exports.updateProfileMeta = async ctx => {
     ctx.status = 200;
   } catch (e) {
     ctx.status = 500;
-    // Further handle your error on the back-end
   }
-}
+};
 
 exports.apply = async ctx => {
   try {
@@ -27,6 +25,5 @@ exports.apply = async ctx => {
     ctx.status = 200;
   } catch (e) {
     ctx.status = 500;
-    // Further handle your error on the back-end
   }
-}
+};
