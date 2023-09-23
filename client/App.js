@@ -7,6 +7,7 @@ import Login from './components/Login'
 import List from './components/List'
 import Profile from './components/Profile';
 import Preferences from './components/Preferences';
+import Map from './components/Map';
 
 const Stack = createStackNavigator();
 
@@ -18,6 +19,7 @@ export default function App() {
         <Stack.Screen name="Profile" component={Profile} />
         <Stack.Screen name="Preferences" component={Preferences} />
         <Stack.Screen name="List" component={List} />
+        <Stack.Screen name="Map" component={Map} />
 
         {/* <View style={styles.container}>
           <Top />

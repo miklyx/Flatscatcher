@@ -29,7 +29,7 @@ export default function Login({ navigation }) {
       <StatusBar style="auto" />
       <Top />
       <View style={styles.logcontainer}>
-        <Text style={styles.titletext}>this is login component</Text>
+        <Text style={styles.titletext}></Text>
         <Text style={styles.logtext}>Email:</Text>
         <TextInput
           style={styles.input}
@@ -44,7 +44,7 @@ export default function Login({ navigation }) {
         />
         <Button style={styles.button} title="Login" onPress={handleLogin} />
         <TouchableOpacity onPress={handleLogin}>
-          <Text>Touch this and log in</Text>
+          <Text></Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -83,6 +83,7 @@ const styles = StyleSheet.create({
   button: {
     color: '#ffffff',
     width: 800,
-    alignSelf: 'center'
+    alignSelf: 'center',
+    marginTop: 100,
   }
 });

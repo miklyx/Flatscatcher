@@ -9,9 +9,15 @@ export default function Profile ({ route, navigation}) {
   const [isLoaded, setIsLoaded] = useState(false);
   const [userStats, setUserStats] = useState(null);
   const {userId} = route.params;
+  
   const handleSearch = () => {
-    navigation.navigate('List', { userId });
+    navigation.navigate('List', { userId, userData });
   };
+
+  const handleMap = () => {
+    navigation.navigate('Map', { userId, userData });
+  };
+
   const handlePreferences = () => {
     navigation.navigate('Preferences', { userId, userData, userStats })
   }
@@ -30,22 +36,25 @@ export default function Profile ({ route, navigation}) {
 
   return (
     <View style={styles.container}>
-      {isLoaded && <Text> This is profile of {userData.first_name} {userData.last_name}</Text>}
+      {isLoaded && <Text style={styles.title}> This is profile of {userData.first_name} {userData.last_name}</Text>}
       <View style={styles.stats}>
         <View style={styles.statBlock}>
           <TouchableOpacity onPress={handlePreferences}>
           {isLoaded && 
             <Image source={{uri: userData && userData.pic_url}}
-                  style={{width: 50, height: 100}} />
+                  style={{width: 60, height: 120}} />
                   }
           </TouchableOpacity>
         </View>
         <View style={styles.statBlock}>
-          {userStats && <Text> Last visit was {moment(userStats.lastvisit).format('Do of MMMM YYYY, h:mm a')}</Text>}
+          {userStats && <Text style={{fontWeight:'bold', marginTop: 20}}> Last visit: {moment(userStats.lastvisit).format('h:mm a, Do of MMMM YYYY')}</Text>}
         </View>
       </View>
       <View style={styles.search}>
         <Text> This is a map for {userId} user</Text>
+        <TouchableOpacity onPress={handleMap}>
+          <Text>Touch this and see map</Text>
+        </TouchableOpacity>
       </View>
       <View style={styles.search}>
         <Text> This is a search for {userId} user</Text>
@@ -63,7 +72,12 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgb(200,200,255)',
     flex: 1,
     flexDirection: 'column',
-    justifyContent: 'center'
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  title: {
+    fontWeight: 'bold',
+    marginTop: 25,
   },
   stats: {
     flex: 1,
@@ -72,15 +86,19 @@ const styles = StyleSheet.create({
     alignItems: 'flex-start',
     marginTop: 30,
     
+    width: 450,
+    
     backgroundColor: 'rgb(200,200,200)',
 
   },
   statBlock: {
-    height: 100,
-    width: 100,
+    height: 150,
+    width: 150,
     backgroundColor: 'rgb(200,100,255)',
-    marginTop: 30,
-
+    marginTop: 50,
+    borderRadius: 35,
+    padding: 15,
+    
   },
   search: {
     flex: 1,

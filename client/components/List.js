@@ -3,7 +3,7 @@ import { View,Text, StyleSheet, ScrollView, TouchableOpacity } from "react-nativ
 import { getFlats } from '../apiService'
 
 export default function List ({ route }) {
-  const {userId} = route.params;
+  const {userId, userData} = route.params;
   const [flats, setFlats] = useState([]);
   const [visibleFlats, setVisibleFlats] = useState(30);
 

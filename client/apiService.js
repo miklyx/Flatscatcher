@@ -1,4 +1,4 @@
-const URL = 'http://10.0.2.2:3003'
+const URL = /* 'localhost:3003' */'http://10.0.2.2:3003'
 
 export async function onLogin (userId) {
   try {
