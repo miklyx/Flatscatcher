@@ -3,6 +3,13 @@ const pool = require('./index');
 
 
 exports.getAll = async () => {
-  const res = await pool.query('SELECT id, image, url, title, price, size, rooms, address FROM clear order by "false" desc');
+  const sql = 'SELECT clr.id, clr.image, clr.url, clr.title, dm.prc as price, dm.sz as size, dm.rom as rooms, dm.adr as address\
+  FROM clear clr\
+  join dm_wng_clr dm\
+  on dm.id = clr.id and dm.adr is not null\
+  where dm.adr is not null\
+  order by clr.id desc'
+  const res = await pool.query(sql)
+  //const res = await pool.query('SELECT id, image, url, title, price, size, rooms, address FROM clear order by "false" desc');
   return res.rows;
 };

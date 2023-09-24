@@ -4,7 +4,8 @@ const profileMeta = require('../models/profileMeta');
 
 exports.getProfileMeta = async ctx => {
   try {
-    ctx.body = await profileMeta.getProfileMeta(ctx.request.body);
+    const userId = ctx.query.user_id;
+    ctx.body = await profileMeta.getProfileMeta({ user_id: userId});
   } catch (e) {
     ctx.status = 500;
   }

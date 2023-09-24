@@ -1,5 +1,5 @@
 import React, {Component, useState} from "react";
-import {TextInput, Button, Text, View, StyleSheet, TouchableOpacity, StatusBar} from 'react-native';
+import {TextInput, Image, Text, View, StyleSheet, TouchableOpacity, StatusBar} from 'react-native';
 
 import Top from "./Top";
 
@@ -19,6 +19,10 @@ export default function Login({ navigation }) {
   return (
     <View style={styles.container}>
       <StatusBar style="auto" />
+      <Image
+        source={require('../assets/top_banner_light.png')}
+        style={styles.banner}
+      />
       <Top />
       <View style={styles.logcontainer}>
         <Text style={styles.titletext}></Text>
@@ -34,9 +38,8 @@ export default function Login({ navigation }) {
           placeholder="password"
           onChangeText={(text) => setPassword(text)}
         />
-        <Button style={styles.button} title="Login" onPress={handleLogin} />
-        <TouchableOpacity onPress={handleLogin}>
-          <Text></Text>
+        <TouchableOpacity style={styles.button} onPress={handleLogin}>
+          <Text style={{ color: '#FAF2A1', fontWeight: 'bold', fontSize: 16 }}>Login</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -47,7 +50,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    backgroundColor: 'rgb(255,255,255)',
+    backgroundColor: '#759AAB',
   },
   titletext: {
     color: 'red',
@@ -63,19 +66,28 @@ const styles = StyleSheet.create({
  },
  logtext: {
   fontWeight: "bold",
+  color: '#401F3E',
   },
   input: {
     width: 300,
     borderWidth: 1,
-    borderColor: 'gray',
-
+    borderColor: '#401F3E',
+    backgroundColor: '#FAF2A1',
     marginBottom: 10,
     padding: 5,
   },
   button: {
-    color: '#ffffff',
-    width: 800,
-    alignSelf: 'center',
+    backgroundColor: '#401F3E',
+    width: 300,
+    alignItems: 'center',
+    padding: 15,
+    borderRadius: 10,
     marginTop: 100,
-  }
+  },
+  banner: {
+    width: '100%',
+    height: 100, 
+    resizeMode: 'cover', 
+    
+  },
 });

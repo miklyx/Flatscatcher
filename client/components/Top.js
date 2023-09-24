@@ -1,13 +1,28 @@
-import React, {Component} from "react";
+import React, {Component, useEffect} from "react";
 import {Text, View, StyleSheet} from 'react-native';
+import * as Font from 'expo-font';
 
 export default function Top() {
+
+  /* async function loadFont() {
+    await Font.loadAsync({
+      'nconsolata': require('../assets/fonts/Inconsolata/static/Inconsolata_Condensed-Regular.ttf'),
+    });
+  }
+  
+  useEffect(() => {
+    loadFont();
+  }, []); */
+  //-------------NOT WORKING----------------------
+
+  
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>FLATS CATCHER</Text>
+      <Text style={styles.text}>The Ultimate Berlin Wohnungssuche</Text>
     </View>
-  );
-};
+    ); 
+  };
+
 
 const styles = StyleSheet.create({
   container: {
@@ -15,14 +30,14 @@ const styles = StyleSheet.create({
     height: 100,
     width: 450,
     marginTop:30,
-    backgroundColor: 'rgb(200,200,255)',
+    backgroundColor: '#401F3E',
     alignItems: 'center',
     justifyContent: 'center',
     
   },
   text: {
     fontWeight: 'bold',
-    fontSize: 40,
-    color: 'blue',
+    fontSize: 20,
+    color: '#FAF2A1'
   }
 });

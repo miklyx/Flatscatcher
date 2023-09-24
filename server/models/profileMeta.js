@@ -3,7 +3,7 @@ const pool = require('./index');
 
 exports.getProfileMeta = async data => {
   const res = await pool.query('SELECT id, price_max, size_min, district, rooms_min from profilemeta where id = $1', [data.user_id]);
-  return res.rows;
+  return res.rows[0];
 };
 
 exports.updatePreferences = data => {

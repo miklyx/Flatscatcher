@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import { View,Text, StyleSheet, ScrollView, TouchableOpacity } from "react-native";
+import { View,Text, StyleSheet, ScrollView, TouchableOpacity, Image } from "react-native";
 import MapView from "react-native-maps";
 import { getFlats } from '../apiService';
 import { Marker } from "react-native-maps";
@@ -76,6 +76,10 @@ export default function Map ({ route }) {
   return (
     <View style={styles.container}>
       <View style={styles.profile}>
+        <Image
+        source={require('../assets/logo_dark.png')}
+        style={styles.banner}
+        />
         <Text> This a map of flats for {userData.first_name}</Text>
       </View>
       <ScrollView>
@@ -100,6 +104,10 @@ export default function Map ({ route }) {
        {flats.slice(0, visibleFlats).map((flat) => (
         <View key={flat.id} style={styles.flatBlock}>
           <Text>{flat.title}</Text>
+          <Text>{flat.price}</Text>
+          <Text>{flat.size}</Text>
+          <Text>{flat.address}</Text>
+
           <TouchableOpacity style={styles.loadMoreButton} onPress={handleApply}>
             <Text>Apply?</Text>
           </TouchableOpacity>
@@ -118,20 +126,23 @@ export default function Map ({ route }) {
 
 const styles = StyleSheet.create({
   container: {
-    marginTop:30,
-    backgroundColor: 'rgb(200,200,255)',
+    backgroundColor: '#759AAB',
     flex: 1,
     flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center'
+    justifyContent: 'center'
   },
   flatBlock: {
-    backgroundColor: 'white', 
+    backgroundColor: '#FAF2A1', 
+    color: '#401F3E',
     borderWidth: 1, 
     borderColor: 'gray', 
     borderRadius: 5, 
     padding: 10, 
-    marginVertical: 5,
+    marginVertical: 10,
+    marginHorizontal: 15,
+  },
+  loadMore: {
+    fontWeight: 'bold',
   },
   loadMore: {
     fontWeight: 'bold',
@@ -140,5 +151,13 @@ const styles = StyleSheet.create({
     width: 400,
     height: 500,
     alignSelf: 'center'
+  },
+  banner: {
+    width: 50,
+    marginTop: 30,
+    marginLeft: 30,
+    height: 50, 
+    resizeMode: 'cover', 
+    
   },
 });
