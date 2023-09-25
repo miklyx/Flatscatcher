@@ -72,7 +72,7 @@ export default function List ({ route }) {
   });
 
   const sortedFlats = (flats) => {
-    if (!sortOrder) return flats;
+    if (sortOrder === "default") return flats;
     if (sortOrder === "ascending") {
       return flats.sort((a, b) => a.price - b.price);
     } else {
@@ -163,6 +163,15 @@ export default function List ({ route }) {
           ]}
         >
           <Text style={styles.sortButtonText}>Descending</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => setSortOrder("default")}
+          style={[
+            styles.sortButton,
+            sortOrder === "default" ? styles.activeSortButton : null,
+          ]}
+        >
+          <Text style={styles.sortButtonText}>Default</Text>
         </TouchableOpacity>
       </View>
       )}
