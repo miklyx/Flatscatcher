@@ -80,8 +80,8 @@ export default function Map ({ route }) {
         source={require('../assets/logo_dark.png')}
         style={styles.banner}
         />
-        <Text> This a map of flats for {userData.first_name}</Text>
-      </View>
+         <Text> This a map of flats for {userData.first_name}</Text>
+       </View>
       <ScrollView>
       <MapView 
         style={styles.map} 
@@ -104,8 +104,8 @@ export default function Map ({ route }) {
        {flats.slice(0, visibleFlats).map((flat) => (
         <View key={flat.id} style={styles.flatBlock}>
           <Text>{flat.title}</Text>
-          <Text>{flat.price}</Text>
-          <Text>{flat.size}</Text>
+          <Text>{String(flat.price)}</Text>
+          <Text>{String(flat.size)}</Text>
           <Text>{flat.address}</Text>
 
           <TouchableOpacity style={styles.loadMoreButton} onPress={handleApply}>

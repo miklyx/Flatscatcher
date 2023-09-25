@@ -63,7 +63,13 @@ export default function Profile ({ route, navigation}) {
                     style={{width: 60, height: 120}} />   
               }
             </TouchableOpacity>
-            <Text >Profile</Text>
+            <TouchableOpacity onPress={handlePreferences}>
+              <View >
+                <Text style={styles.textProfileBlock} >Update</Text>
+                <Text style={styles.textProfileBlock}>Profile</Text>
+              </View>
+            </TouchableOpacity>
+
           </View>
           <View style={styles.statBlock}>
             {userStats && <Text style={{fontWeight:'bold', marginTop: 20}}> Last visit: {moment(userStats.lastvisit).format('h:mm a, Do of MMMM YYYY')}</Text>}
@@ -121,8 +127,13 @@ const styles = StyleSheet.create({
 
   },
   statBlock: {
+    flex: 1,
+    flexDirection: 'row',
+    
+    alignItems: 'center',
     height: 150,
     width: 150,
+    maxWidth: 150,
     color: '#401F3E',
     backgroundColor: '#FAF2A1',
     marginTop: 20,
@@ -165,4 +176,8 @@ const styles = StyleSheet.create({
     resizeMode: 'cover', 
     
   },
+  textProfileBlock: {
+    fontWeight: 'bold',
+    alignSelf: 'center',
+  }
 });

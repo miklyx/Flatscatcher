@@ -6,6 +6,7 @@ import { getFlats } from '../apiService';
 export default function List ({ route }) {
   const {userId, userData} = route.params;
   const [flats, setFlats] = useState([]);
+  const [isLoaded, setIsLoaded] = useState(false);
   const [visibleFlats, setVisibleFlats] = useState(30);
   const [showSearchBlock, setShowSearchBlock] = useState(false);
   const [searchDistrict, setSearchDistrict] = useState(''); 
@@ -16,6 +17,8 @@ export default function List ({ route }) {
    getFlats().then(res => {
     //console.log(res)
       setFlats(res);
+      setIsLoaded(true);
+
     })
   },[])
 
@@ -57,7 +60,8 @@ export default function List ({ route }) {
         source={require('../assets/logo_dark.png')}
         style={styles.banner}
         />
-        <Text style={styles.profile}> This a list of flats for {userData.first_name} {userData.last_name}</Text>
+        {isLoaded &&
+        <Text style={styles.profile}> This a list of flats for {userData.first_name} {userData.last_name}</Text>}
       </View>
 
       <View style={styles.headerButtons}>
@@ -88,9 +92,9 @@ export default function List ({ route }) {
           />
         </View>
       )}
-
+      
       <ScrollView>
-       {filteredFlats.slice(0, visibleFlats).map((flat) => (
+       {filteredFlats && filteredFlats.slice(0, visibleFlats).map((flat) => (
         <View key={flat.id} style={styles.flatBlock}>
           <Text>{flat.title}</Text>
           <Text>{flat.price}</Text>
