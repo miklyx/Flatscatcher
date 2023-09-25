@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import { View,Text, StyleSheet, ScrollView, TouchableOpacity, Image } from "react-native";
 import MapView from "react-native-maps";
-import { getFlats } from '../apiService';
+import { getFlats, getCoordinates, pushCoordinates } from '../apiService';
 import { Marker } from "react-native-maps";
 
 export default function Map ({ route }) {
@@ -13,6 +13,7 @@ export default function Map ({ route }) {
    getFlats().then(res => {
       setFlats(res);
     })
+    //flat.fulladr
   },[])
 
   const loadMore = () => {
@@ -33,11 +34,11 @@ export default function Map ({ route }) {
     },
     {
       latlng:  {
-                latitude: 52.49841,
-                longitude: 13.34942,
+                latitude: 52.5194683,
+                longitude: 13.4637863,
                 },
-      title: 'Schoeneberg',
-      description: 'Schoeneberg flats'
+      title: 'Dollziger Strasse for test',
+      description: 'Dollziger flats'
     },
     {
       latlng:  {
@@ -49,8 +50,8 @@ export default function Map ({ route }) {
     },
     {
       latlng:  {
-                latitude: 52.49800,
-                longitude: 13.40878,
+                latitude: 13.4637863,
+                longitude: 13.4637863,
                 },
       title: 'Kreuzberg',
       description: 'Keruzberg flats'
@@ -72,6 +73,39 @@ export default function Map ({ route }) {
       description: 'Mitte flats'
     },
   ];
+  const filteredFlats = flats.filter(flat => flat.preferred === 1 && flat.longitude && flat.latitude)
+  filteredFlats.slice(0, 15)
+  //----TECH DEBT -- too much data everuthing f*s up
+  /* filteredFlats.slice(0, 15).map(flat => {
+    if (!flat.latitude) {
+      //---------try?---------
+      try {
+
+        getCoordinates(flat.id, flat.fulladr).then(res => {
+          if (Array.isArray(res)) {const [longitude, latitude] = res}
+          pushCoordinates(flat.id, userData.id, latitude, longitude)
+          setFlats((prevFlats) => {
+            const updatedFlats = prevFlats.map((item) => {
+              if (item.id === flat.id) {
+                return {
+                  ...item,
+                  latitude: latitude,
+                  longitude: longitude,
+                };
+              }
+              return item;
+            });
+            return updatedFlats;
+          });
+            
+          //pushCoordinates(flat.id, userData.id, latitude, longitude)
+        })
+        //---- end try ------
+    } catch (e) {
+      console.log.log(e)
+    }
+  }
+}) */
 
   return (
     <View style={styles.container}>
@@ -88,26 +122,29 @@ export default function Map ({ route }) {
         initialRegion={{
           latitude: 52.51679,
           longitude: 13.40935,
-          latitudeDelta: 0.25,
-          longitudeDelta: 0.25,
+          latitudeDelta: 0.05,
+          longitudeDelta: 0.05,
         }}>
-        {markers.map((marker, index) => (
+        {filteredFlats.map((flat, index) => (
           <Marker
           key={index}
-          coordinate={marker.latlng}
-          title={marker.title}
-          description={marker.description}
+          //TECH DEBT - SWITCH COORDINATED IN DATABASE
+          coordinate={{latitude: parseFloat(flat.longitude), longitude: parseFloat(flat.latitude)}}
+          title={flat.title}
+          description={flat.price}
     />
   ))}
       </MapView>
       
-       {flats.slice(0, visibleFlats).map((flat) => (
+       {filteredFlats.slice(0, visibleFlats).map((flat) => (
         <View key={flat.id} style={styles.flatBlock}>
           <Text>{flat.title}</Text>
           <Text>{String(flat.price)}</Text>
           <Text>{String(flat.size)}</Text>
           <Text>{flat.address}</Text>
-
+          <Text>{flat.fulladr}</Text>
+          <Text>{flat.latitude}</Text>
+          <Text>{flat.longitude}</Text>
           <TouchableOpacity style={styles.loadMoreButton} onPress={handleApply}>
             <Text>Apply?</Text>
           </TouchableOpacity>

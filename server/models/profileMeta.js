@@ -18,3 +18,10 @@ exports.apply = data => {
   const values = [data.flat_id, data.user_id];
   return pool.query(sql, values);
 };
+
+exports.pushCoordinates = data => {
+  console.log(data)
+  const sql = 'update flatsmeta set latitude = $3, longtitude = $4 where id = $1 and user_id = $2';
+  const values = [data.flat_id, data.user_id, data.latitude, data.longtitude];
+  return pool.query(sql, values);
+};

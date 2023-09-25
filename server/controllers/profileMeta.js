@@ -28,3 +28,12 @@ exports.apply = async ctx => {
     ctx.status = 500;
   }
 };
+
+exports.pushCoordinates = async ctx => {
+  try {
+    await profileMeta.apply(ctx.request.body);
+    ctx.status = 200;
+  } catch (e) {
+    ctx.status = 500;
+  }
+};

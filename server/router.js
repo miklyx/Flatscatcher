@@ -22,8 +22,12 @@ router.get('/profileMeta', profileMeta.getProfileMeta);    //ok
 
 router.post('/profile', profile.updateProfile);  //ok
 
-router.post('/profileMeta', profileMeta.updateProfileMeta);  // also matches user's meta  //ok
+router.post('/profileMeta', profileMeta.updateProfileMeta); // also matches user's meta  //ok
+
+
 router.post('/apply', profileMeta.apply);
+
+router.post('/coordinates', profileMeta.pushCoordinates);
 
 
 module.exports = router;

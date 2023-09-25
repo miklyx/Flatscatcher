@@ -134,6 +134,40 @@ export async function updateProfileMeta (maxPrice, minSize, district, userId) {
         user_id: userId
       })
     });
+    const data = await responce.text();
+    return data;
+  } catch (e) {
+    console.log(e);
+  }
+}
+export async function getCoordinates (flatId, adr) {
+  try {
+    const geoURL = 'https://api.geoapify.com/v1/geocode/search?text='
+    const apiAdr = 'apiKey=eee1cb95010b46c495452f1642cc866d'
+    const responce = await fetch(`${geoURL}${adr}&${apiAdr}`, {
+      method: "GET",
+      headers: {"Content-Type" : 'application/json'},
+    });
+    const data = await responce.json();
+    return data.features[0].geometry.coordinates;
+  } catch (e) {
+    console.log(e);
+  }
+}
+
+
+export async function pushCoordinates (flatId, userId, latitude, longtitude) {
+  try {
+    const responce = await fetch(`${URL}/coordinates`, {
+      method: "POST",
+      headers: {"Content-Type" : 'application/json'},
+      body: JSON.stringify({
+        flat_id: flatId,
+        user_id: userId, 
+        latitude: latitude,
+        longtitude: longtitude
+      })
+    });
     
     const data = await responce.text();
     return data;
