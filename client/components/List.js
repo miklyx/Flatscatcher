@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import { View,Text, StyleSheet, ScrollView, TouchableOpacity, TextInput, Image } from "react-native";
+import { View,Text, StyleSheet, ScrollView, TouchableOpacity, TextInput, Image, Linking } from "react-native";
 import { getFlats, applyTo } from '../apiService';
 
 export default function List ({ route }) {
@@ -48,6 +48,14 @@ export default function List ({ route }) {
     }) 
     .catch((error) => {
       console.error("Error applying:", error);
+    });
+    Linking.openURL('https://www.immobilienscout24.de/')// TECH DEBT - RESURRECT NEW FLATS FLOW flat.url)
+        .then(() => {
+            alert('Applied and opened the link!');
+          })
+        .catch((error) => {
+        console.error('Error opening the link:', error);
+          alert('Applied, but there was an error opening the link.');
     });
     
   };

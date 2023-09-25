@@ -24,55 +24,6 @@ export default function Map ({ route }) {
     alert('Applied!');
   };
 
-  const markers = [
-    {
-      latlng: {latitude: 52.54636,
-              longitude: 13.35907,
-              },
-      title: 'Wedding',
-      description: 'Wedding flats'
-    },
-    {
-      latlng:  {
-                latitude: 52.5194683,
-                longitude: 13.4637863,
-                },
-      title: 'Dollziger Strasse for test',
-      description: 'Dollziger flats'
-    },
-    {
-      latlng:  {
-                latitude: 52.53869,
-                longitude: 13.42427,
-                },
-      title: 'Prenzlauer Berg',
-      description: 'Prenzlauer Berg flats'
-    },
-    {
-      latlng:  {
-                latitude: 13.4637863,
-                longitude: 13.4637863,
-                },
-      title: 'Kreuzberg',
-      description: 'Keruzberg flats'
-    },
-    {
-      latlng:  {
-                latitude: 52.51594,
-                longitude: 13.45372,
-                },
-      title: 'Friedrichshain',
-      description: 'Friedrichshain flats'
-    },
-    {
-      latlng:  {
-                latitude: 52.53753,
-                longitude: 13.36202,
-                },
-      title: 'Mitte',
-      description: 'Mitte flats'
-    },
-  ];
   const filteredFlats = flats.filter(flat => flat.preferred === 1 && flat.longitude && flat.latitude)
   filteredFlats.slice(0, 15)
   //----TECH DEBT -- too much data everuthing f*s up
@@ -131,20 +82,17 @@ export default function Map ({ route }) {
           //TECH DEBT - SWITCH COORDINATED IN DATABASE
           coordinate={{latitude: parseFloat(flat.longitude), longitude: parseFloat(flat.latitude)}}
           title={flat.title}
-          description={flat.price}
+          description={'Price: '+flat.price+', Address: '+flat.fulladr}
     />
   ))}
       </MapView>
       
        {filteredFlats.slice(0, visibleFlats).map((flat) => (
-        <View key={flat.id} style={styles.flatBlock}>
+        <View key={flat.id} style={styles.preferredFlat}>
           <Text>{flat.title}</Text>
           <Text>{String(flat.price)}</Text>
           <Text>{String(flat.size)}</Text>
           <Text>{flat.address}</Text>
-          <Text>{flat.fulladr}</Text>
-          <Text>{flat.latitude}</Text>
-          <Text>{flat.longitude}</Text>
           <TouchableOpacity style={styles.loadMoreButton} onPress={handleApply}>
             <Text>Apply?</Text>
           </TouchableOpacity>
@@ -173,6 +121,16 @@ const styles = StyleSheet.create({
     color: '#401F3E',
     borderWidth: 1, 
     borderColor: 'gray', 
+    borderRadius: 5, 
+    padding: 10, 
+    marginVertical: 10,
+    marginHorizontal: 15,
+  },
+  preferredFlat: {
+    backgroundColor: '#FAF2A1', 
+    color: '#401F3E',
+    borderWidth: 1, 
+    borderColor: 'red', 
     borderRadius: 5, 
     padding: 10, 
     marginVertical: 10,
