@@ -9,9 +9,12 @@ export default function List ({ route }) {
   const [visibleFlats, setVisibleFlats] = useState(30);
   const [applied, setApplied] = useState(false);
   const [showSearchBlock, setShowSearchBlock] = useState(false);
+  const [showSortBlock, setShowSortBlock] = useState(false);
+  const [sortOrder, setSortOrder] = useState('');
   const [searchDistrict, setSearchDistrict] = useState(''); 
   const [searchPrice, setSearchPrice] = useState(0); 
   const [searchArea, setSearchArea] = useState(0); 
+  const [searchPreferred, setSearchPreferred] = useState('');
 
  useEffect(() => {
    getFlats().then(res => {
@@ -54,13 +57,29 @@ export default function List ({ route }) {
     
   };
 
+  const handleSort = () => {
+    setShowSortBlock(!showSortBlock);
+    
+  };
+
   const filteredFlats = flats.filter(flat => {
     const districtMatch = searchDistrict === '' || flat.address.toLowerCase().includes(searchDistrict.toLowerCase());
     const priceMatch = searchPrice === '' || String(flat.price).includes(searchPrice);
     const areaMatch = searchArea === '' || String(flat.size).includes(searchArea);//<= String(flat.size) && String(flat.size) <= searchArea;
+    const preferredMatch = searchPreferred === "" || String(flat.preferred) === searchPreferred;
 
-    return districtMatch || priceMatch || areaMatch;
+    return (districtMatch || priceMatch || areaMatch) && preferredMatch;
   });
+
+  const sortedFlats = (flats) => {
+    if (!sortOrder) return flats;
+    if (sortOrder === "ascending") {
+      return flats.sort((a, b) => a.price - b.price);
+    } else {
+      return flats.sort((a, b) => b.price - a.price);
+    }
+
+  } 
 
 
   //Tech debt------
@@ -90,6 +109,9 @@ export default function List ({ route }) {
         <TouchableOpacity onPress={handleSearch}>
           <Text style={styles.headerButton}>Search</Text>
         </TouchableOpacity>
+        <TouchableOpacity onPress={handleSort}>
+          <Text style={styles.headerButton}>Sort</Text>
+        </TouchableOpacity>
       </View>
 
       {showSearchBlock && (
@@ -102,21 +124,51 @@ export default function List ({ route }) {
           />
           <TextInput
             style={styles.input}
-            placeholder="Price"
+            placeholder="Max Price"
             value={searchPrice}
             onChangeText={text => setSearchPrice(text)}
           />
           <TextInput
             style={styles.input}
-            placeholder="Area"
+            placeholder="Min Area"
             value={searchArea}
             onChangeText={text => setSearchArea(text)}
           />
+          <TextInput
+            style={styles.input}
+            placeholder="Preferred (0 or 1)"
+            value={searchPreferred}
+            onChangeText={(text) => setSearchPreferred(text)}
+          />
         </View>
+      )}
+
+      {showSortBlock && (
+        <View style={styles.searchBlock}>
+          <Text style={styles.sortLabel}>Sort:</Text>
+          <TouchableOpacity
+            onPress={() => setSortOrder("ascending")}
+            style={[
+              styles.sortButton,
+              sortOrder === "ascending" ? styles.activeSortButton : null,
+          ]}
+        >
+          <Text style={styles.sortButtonText}>Ascending</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => setSortOrder("descending")}
+          style={[
+            styles.sortButton,
+            sortOrder === "descending" ? styles.activeSortButton : null,
+          ]}
+        >
+          <Text style={styles.sortButtonText}>Descending</Text>
+        </TouchableOpacity>
+      </View>
       )}
       
       <ScrollView>
-       {filteredFlats && filteredFlats.slice(0, visibleFlats).map((flat) => (
+       {filteredFlats && sortedFlats(filteredFlats).slice(0, visibleFlats).map((flat) => (
         <View key={flat.id} style={[styles.flatBlock, flat.preferred === 1 ? styles.preferredFlat : null]}>
           <Text>{flat.title}</Text>
           <Text>{flat.price}</Text>
