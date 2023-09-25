@@ -117,7 +117,7 @@ export default function List ({ route }) {
       
       <ScrollView>
        {filteredFlats && filteredFlats.slice(0, visibleFlats).map((flat) => (
-        <View key={flat.id} style={styles.flatBlock}>
+        <View key={flat.id} style={[styles.flatBlock, flat.preferred === 1 ? styles.preferredFlat : null]}>
           <Text>{flat.title}</Text>
           <Text>{flat.price}</Text>
           <Text>{flat.size}</Text>
@@ -161,6 +161,16 @@ const styles = StyleSheet.create({
     color: '#401F3E',
     borderWidth: 1, 
     borderColor: 'gray', 
+    borderRadius: 5, 
+    padding: 10, 
+    marginVertical: 10,
+    marginHorizontal: 15,
+  },
+  preferredFlat: {
+    backgroundColor: '#FAF2A1', 
+    color: '#401F3E',
+    borderWidth: 1, 
+    borderColor: 'red', 
     borderRadius: 5, 
     padding: 10, 
     marginVertical: 10,

@@ -8,7 +8,7 @@ exports.getProfile = async (data) => {
 };
 
 exports.updateProfile = async (data) => {
-  console.log(data)
+  //console.log(data)
   const sql = 'update profile\
                 set first_name = $1, last_name = $2, phone = $3\
                 where id = $4';

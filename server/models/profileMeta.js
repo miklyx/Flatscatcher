@@ -6,10 +6,11 @@ exports.getProfileMeta = async data => {
   return res.rows[0];
 };
 
-exports.updatePreferences = data => {
-  const sql = 'select flat_id, preferred from updatepreferences($1, $2, $3, $4, $5)';
-  const values = [data.maxPrice , data.minSize, data.district, data.minRooms, data.id];
-  return pool.query(sql, values);
+exports.updatePreferences = async data => {
+  console.log(data)
+  const sql = 'select flat_id, preferred from updatepreferences($1, $2, $3, $4)';
+  const values = [data.max_price , data.min_size, data.distr, data.user_id];
+  return await pool.query(sql, values);
 };
 
 exports.apply = data => {

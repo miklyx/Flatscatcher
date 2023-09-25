@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { View,Text, StyleSheet, TextInput, TouchableOpacity, Image, StatusBar} from "react-native";
-import { updateProfile } from "../apiService";
+import { View,Text, StyleSheet, TextInput, TouchableOpacity, Image, StatusBar, ScrollView, KeyboardAvoidingView} from "react-native";
+import { updateProfile, updateProfileMeta } from "../apiService";
 
 import moment from "moment";
 
@@ -10,70 +10,86 @@ export default function Preferences ({ route }) {
   const [updatedUserName, setUpdatedUserName] = useState(userData.first_name);
   const [updatedUserLName, setUpdatedUserLName] = useState(userData.last_name);
   const [updatedUserPhone, setUpdatedUserPhone] = useState(userData.phone);
-  const [updatedPreferences, setUpdatedPreferences] = useState([userPreferences]);
+  const [updatedMaxPrice, setUpdatedMaxPrice] = useState(userPreferences.price_max);
+  const [updatedMinSize, setUpdatedMinSize] = useState(userPreferences.size_min);
+  const [updatedDistrict, setUpdatedDistrict] = useState(userPreferences.district);
+
+
 
   
   const handleUpdateUser = () => {
     updateProfile(updatedUserName, updatedUserLName, updatedUserPhone, userData.id)
+    updateProfileMeta(updatedMaxPrice, updatedMinSize, updatedDistrict, userData.id)
     //alert('updated!');
   }
 
   const handleUpdatePreferences = () => {
+    updateProfileMeta(updatedMaxPrice, updatedMinSize, updatedDistrict, userData.id)
     //push to db
   }
   
   return (
-    <View style={styles.container}>
-      <View>
-        <StatusBar style="auto" />
-        <Image
-          source={require('../assets/top_banner_light.png')}
-          style={styles.banner}
-        />
-      </View>
-      <View style={styles.profile}>
-      <Text style={{color:'#FAF2A1',margin: 15, fontSize:20, fontWeight: 'bold'}}>Update profile</Text>
-        <TextInput
-          style={styles.input}
-          placeholder={userData.first_name}
-          onChangeText={(text) => setUpdatedUserName(text)}
-        />
-        <TextInput
-          style={styles.input}
-          placeholder={userData.last_name}
-          onChangeText={(text) => setUpdatedUserLName(text)}
-        />
-        <TextInput
-          style={styles.input}
-          placeholder={userData.phone}
-          onChangeText={(text) => setUpdatedUserPhone(text)}
-        />
-        <View style={styles.updateBlock}>
-          <TouchableOpacity  onPress={handleUpdateUser}>
-            <Text style={styles.updateText}>Update</Text>
-          </TouchableOpacity>
+    <ScrollView
+  contentContainerStyle={{ flexGrow: 1 }}
+  keyboardShouldPersistTaps="handled" // Обрабатывать касания только при активной клавиатуре
+>
+    <KeyboardAvoidingView
+      behavior={Platform.OS === "ios" ? "padding" : "height"} // Поднимать вверх на iOS, растягивать на Android
+      style={{ flex: 1 }}
+    >
+        <View style={styles.container}>
+          <View>
+            <StatusBar style="auto" />
+            <Image
+              source={require('../assets/top_banner_light.png')}
+              style={styles.banner}
+            />
+          </View>
+          <View style={styles.profile}>
+          <Text style={{color:'#FAF2A1',margin: 15, fontSize:20, fontWeight: 'bold'}}>Update profile</Text>
+            <TextInput
+              style={styles.input}
+              value={updatedUserName}
+              onChangeText={(text) => setUpdatedUserName(text)}
+            />
+            <TextInput
+              style={styles.input}
+              value={updatedUserLName}
+              onChangeText={(text) => setUpdatedUserLName(text)}
+            />
+            <TextInput
+              style={styles.input}
+              value={updatedUserPhone}
+              onChangeText={(text) => setUpdatedUserPhone(text)}
+            />
+            <View style={styles.updateBlock}>
+              <TouchableOpacity  onPress={handleUpdateUser}>
+                <Text style={styles.updateText}>Update</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+          <View style={styles.preferences}>
+            <Text> This is last visit {moment(userStats.lastvisit).format('Do of MMMM YYYY, h:mm a')}</Text>
+            <TextInput
+              style={styles.input}
+              value={updatedDistrict}
+              onChangeText={(text) => setUpdatedDistrict(text)}
+            />
+            <TextInput
+              style={styles.input}
+              value={String(updatedMaxPrice)}
+              onChangeText={(text) => setUpdatedMaxPrice(text)}
+            />
+            <TextInput
+              style={styles.input}
+              value={String(updatedMinSize)}
+              onChangeText={(text) => setUpdatedMinSize(text)}
+            />
+            
+          </View>
         </View>
-      </View>
-      <View style={styles.preferences}>
-        <Text> This is last visit {moment(userStats.lastvisit).format('Do of MMMM YYYY, h:mm a')}</Text>
-        <TextInput
-          style={styles.input}
-          placeholder={userPreferences.district}
-          onChangeText={(text) => setUpdatedPreferences(text)}
-        />
-        <TextInput
-          style={styles.input}
-          placeholder={String(userPreferences.price_max)}
-          onChangeText={(text) => setUpdatedPreferences(text)}
-        />
-        <TextInput
-          style={styles.input}
-          placeholder={String(userPreferences.size_min)}
-          onChangeText={(text) => setUpdatedPreferences(text)}
-        />
-        
-      </View>
-    </View>
+      </KeyboardAvoidingView>
+    </ScrollView>
   )
 }
 
