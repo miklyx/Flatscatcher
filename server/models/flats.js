@@ -3,10 +3,12 @@ const pool = require('./index');
 
 
 exports.getAll = async () => {
-  const sql = 'SELECT clr.id, clr.image, clr.url, clr.title, dm.prc as price, dm.sz as size, dm.rom as rooms, dm.adr as address\
+  const sql = 'SELECT clr.id, clr.image, clr.url, clr.title, dm.prc as price, dm.sz as size, dm.rom as rooms, dm.adr as address, f.applied\
   FROM clear clr\
   join dm_wng_clr dm\
   on dm.id = clr.id and dm.adr is not null\
+  join flatsmeta f\
+  on f.id = clr.id\
   where dm.adr is not null\
   order by clr.id desc'
   const res = await pool.query(sql)

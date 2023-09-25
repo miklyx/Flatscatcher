@@ -28,11 +28,13 @@ exports.updateLogoutMeta = async ctx => {
   }
 };
 
-exports.apply = async (ctx) => {
+/* exports.apply = async (ctx) => {
   try {
+    console.log(ctx.request.body)
     ctx.body = await flatsMeta.applyTo(ctx.request.body);
   } catch (e) {
     ctx.status = 500;
   }
 };
 
+ */

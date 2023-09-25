@@ -64,17 +64,18 @@ export async function updateProfilMetaOnLogin (userId) {
   }
 }
 
-export async function applyTo (userId, flatId) {
+export async function applyTo (flatId, userId) {
   try {
     const responce = await fetch(`${URL}/apply`, {
       method: "POST",
       headers: {"Content-Type" : 'application/json'},
-      body: {
-        user_id: userId,
-        flat_id: flatId
-      }
+      body: JSON.stringify({
+        flat_id: flatId,
+        user_id: userId
+      })
     });
-    const data = await responce.json();
+    
+    const data = await responce.text();
     return data;
   } catch (e) {
     console.log(e);
@@ -86,6 +87,7 @@ export async function getFlats () {
   try {
     const responce = await fetch(URL+'/flats')
     const data = await responce.json();
+    //console.log(data)
     return data;
   } catch (e) {
     console.log('this is an catched error',e);
@@ -95,6 +97,26 @@ export async function getFlats () {
 export async function onLogout () {
   try {
     console.log('logged out');
+  } catch (e) {
+    console.log(e);
+  }
+}
+
+export async function updateProfile (firstName, lastName, phone, userId) {
+  try {
+    const responce = await fetch(`${URL}/profile`, {
+      method: "POST",
+      headers: {"Content-Type" : 'application/json'},
+      body: JSON.stringify({
+        first_name: firstName,
+        last_name: lastName,
+        phone: phone,
+        user_id: userId
+      })
+    });
+    
+    const data = await responce.text();
+    return data;
   } catch (e) {
     console.log(e);
   }

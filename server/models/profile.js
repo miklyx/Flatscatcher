@@ -8,7 +8,10 @@ exports.getProfile = async (data) => {
 };
 
 exports.updateProfile = async (data) => {
-  const sql = 'update profile set first_name = $1, last_name = $2, email = $3, phone = $4 where id = $5';
-  const values = [data.firstName , data.lastName, data.email, data.phone, data.id];
+  console.log(data)
+  const sql = 'update profile\
+                set first_name = $1, last_name = $2, phone = $3\
+                where id = $4';
+  const values = [data.first_name , data.last_name, data.phone, data.user_id];
   return await pool.query(sql, values);
 };

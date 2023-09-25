@@ -27,7 +27,7 @@ exports.updateLogoutMeta = async (user) => {
   return res.rows;
 };
 
-exports.applyTo = async (data) => {
+/* exports.applyTo = async (data) => {
   const sql = 'update flatsmeta f\
                 set applied = 1\
                 where user_id = $1\
@@ -36,3 +36,4 @@ exports.applyTo = async (data) => {
   const res = await pool.query(sql, values);
   return res.rows;
 };
+ */

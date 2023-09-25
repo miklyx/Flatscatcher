@@ -32,7 +32,7 @@ export default function Profile ({ route, navigation}) {
     
     getStats(userId).then((data) => {
       setUserStats(data);
-      console.log(data);
+      //console.log(data);
     });
     getPreferences(userId).then((data) => {
       setUserPreferences(data);

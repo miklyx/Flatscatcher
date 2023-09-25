@@ -27,18 +27,26 @@ export default function List ({ route }) {
   };
 
   const handleApply = (flat) => {
-    applyTo(userData.user_id, flat.id).then(res => {
+    console.log(flat)
+    console.log(userData.id)
+    applyTo(flat.id, userData.id).then(res => {
       const updatedFlats = flats.map((item) => {
         if (item.id === flat.id) {
+          console.log(item)
           return { ...item, applied: true };
         }
+        //console.log(item)
         return item;
       });
+      //console.log(updatedFlats);
       setFlats(updatedFlats);
   
       console.log(res);
-    })
-    alert('Applied!');
+    }) 
+    .catch((error) => {
+      console.error("Error applying:", error);
+    });
+    
   };
 
   const handleSearch = () => {
@@ -49,7 +57,7 @@ export default function List ({ route }) {
   const filteredFlats = flats.filter(flat => {
     const districtMatch = searchDistrict === '' || flat.address.toLowerCase().includes(searchDistrict.toLowerCase());
     const priceMatch = searchPrice === '' || String(flat.price).includes(searchPrice);
-    const areaMatch = searchArea <= String(flat.size) && String(flat.size) <= searchArea;
+    const areaMatch = searchArea === '' || String(flat.size).includes(searchArea);//<= String(flat.size) && String(flat.size) <= searchArea;
 
     return districtMatch || priceMatch || areaMatch;
   });

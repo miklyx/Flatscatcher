@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { View,Text, StyleSheet, TextInput, TouchableOpacity, Image, StatusBar} from "react-native";
+import { updateProfile } from "../apiService";
 
 import moment from "moment";
 
@@ -13,8 +14,8 @@ export default function Preferences ({ route }) {
 
   
   const handleUpdateUser = () => {
-    //push to db
-    alert('updated!');
+    updateProfile(updatedUserName, updatedUserLName, updatedUserPhone, userData.id)
+    //alert('updated!');
   }
 
   const handleUpdatePreferences = () => {
