@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import {TextInput, Image, Text, View, StyleSheet, TouchableOpacity, StatusBar} from 'react-native';
+import { updateProfilMetaOnLogin } from "../apiService";
 
 import Top from "./Top";
 
@@ -8,9 +9,11 @@ export default function Login({ navigation }) {
   const [password, setPassword] = useState('');
 
   const handleLogin = () => {
-    
     const email = username;
     const userId=1;
+    updateProfilMetaOnLogin(userId).then((data) => {
+      console.log(data)
+    })
 
     navigation.navigate('Profile', { userId, email });
   };

@@ -48,6 +48,39 @@ export async function getPreferences (userId) {
   }
 }
 
+export async function updateProfilMetaOnLogin (userId) {
+  try {
+    const responce = await fetch(`${URL}/login`, {
+      method: "POST",
+      headers: {"Content-Type" : 'application/json'},
+      body: {
+        user_id: userId
+      }
+    });
+    const data = await responce.json();
+    return data;
+  } catch (e) {
+    console.log(e);
+  }
+}
+
+export async function applyTo (userId, flatId) {
+  try {
+    const responce = await fetch(`${URL}/apply`, {
+      method: "POST",
+      headers: {"Content-Type" : 'application/json'},
+      body: {
+        user_id: userId,
+        flat_id: flatId
+      }
+    });
+    const data = await responce.json();
+    return data;
+  } catch (e) {
+    console.log(e);
+  }
+}
+
 
 export async function getFlats () {
   try {

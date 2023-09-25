@@ -1,12 +1,13 @@
 import React, {useEffect, useState} from "react";
 import { View,Text, StyleSheet, ScrollView, TouchableOpacity, TextInput, Image } from "react-native";
-import { getFlats } from '../apiService';
+import { getFlats, applyTo } from '../apiService';
 
 export default function List ({ route }) {
   const {userData} = route.params;
   const [flats, setFlats] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
   const [visibleFlats, setVisibleFlats] = useState(30);
+  const [applied, setApplied] = useState(false);
   const [showSearchBlock, setShowSearchBlock] = useState(false);
   const [searchDistrict, setSearchDistrict] = useState(''); 
   const [searchPrice, setSearchPrice] = useState(0); 
@@ -25,7 +26,18 @@ export default function List ({ route }) {
     setVisibleFlats(prevVisibleFlats => prevVisibleFlats + 30);
   };
 
-  const handleApply = () => {
+  const handleApply = (flat) => {
+    applyTo(userData.user_id, flat.id).then(res => {
+      const updatedFlats = flats.map((item) => {
+        if (item.id === flat.id) {
+          return { ...item, applied: true };
+        }
+        return item;
+      });
+      setFlats(updatedFlats);
+  
+      console.log(res);
+    })
     alert('Applied!');
   };
 
@@ -102,10 +114,13 @@ export default function List ({ route }) {
           <Text>{flat.price}</Text>
           <Text>{flat.size}</Text>
           <Text>{flat.address}</Text>
-
-          <TouchableOpacity style={styles.loadMoreButton} onPress={handleApply}>
+          {!flat.applied ? (
+          <TouchableOpacity style={styles.loadMoreButton} onPress={() => handleApply(flat)}>
             <Text>Apply?</Text>
-          </TouchableOpacity>
+          </TouchableOpacity>) : (
+          <Text style={{ color: 'gray' }}>Applied</Text>
+          )
+          }
         </View>
       
       ))} 

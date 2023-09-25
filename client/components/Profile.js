@@ -29,8 +29,10 @@ export default function Profile ({ route, navigation}) {
       setUserData(data);
       setIsLoaded(true);
     });
+    
     getStats(userId).then((data) => {
       setUserStats(data);
+      console.log(data);
     });
     getPreferences(userId).then((data) => {
       setUserPreferences(data);
@@ -69,7 +71,13 @@ export default function Profile ({ route, navigation}) {
 
           </View>
           <View style={styles.statBlock}>
-            {userStats && <Text style={{fontWeight:'bold', marginTop: 20}}> Last visit: {moment(userStats.lastvisit).format('h:mm a, Do of MMMM YYYY')}</Text>}
+            {userStats && 
+              <View>
+                <Text style={{fontWeight:'bold', marginTop: 2}}> Last visit: {moment(userStats.lastvisit).format('h:mm a, Do of MMMM YYYY')}</Text>
+                <Text style={{fontWeight:'bold', marginTop: 2}}> Total: {userStats.all}</Text>
+                <Text style={{fontWeight:'bold', marginTop: 2}}> New: {userStats.new}</Text>
+                <Text style={{fontWeight:'bold', marginTop: 2}}> Appied: {userStats.all}</Text>
+              </View>}
           </View>
         </View>
       </View>
