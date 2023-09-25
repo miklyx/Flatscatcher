@@ -10,6 +10,5 @@ module.exports = {
     '10': '#FAF2A1',
     'add1': '#3F2E56',
     'add2': '#453F78',
-
   }
 };

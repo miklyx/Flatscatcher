@@ -1,4 +1,4 @@
-import React, {Component, useState} from "react";
+import React, {useState} from "react";
 import {TextInput, Image, Text, View, StyleSheet, TouchableOpacity, StatusBar} from 'react-native';
 
 import Top from "./Top";
@@ -44,7 +44,7 @@ export default function Login({ navigation }) {
       </View>
     </View>
   );
-};
+}
 
 const styles = StyleSheet.create({
   container: {

@@ -5,7 +5,7 @@ import { getFlats } from '../apiService';
 import { Marker } from "react-native-maps";
 
 export default function Map ({ route }) {
-  const {userId, userData} = route.params;
+  const {userData} = route.params;
   const [flats, setFlats] = useState([]);
   const [visibleFlats, setVisibleFlats] = useState(30);
 
@@ -122,7 +122,7 @@ export default function Map ({ route }) {
       </ScrollView>
     </View>
   )
-};
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -140,9 +140,6 @@ const styles = StyleSheet.create({
     padding: 10, 
     marginVertical: 10,
     marginHorizontal: 15,
-  },
-  loadMore: {
-    fontWeight: 'bold',
   },
   loadMore: {
     fontWeight: 'bold',

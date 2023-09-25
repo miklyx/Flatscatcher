@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { View,Text, StyleSheet, TouchableOpacity, Image, StatusBar } from "react-native";
-import { ReactSVG } from "react";
 import moment from "moment";
 
 
 import { onLogin, getStats, getPreferences } from '../apiService';
-import Top from './Top'
 
 export default function Profile ({ route, navigation}) {
   const [userData, setUserData] = useState(null);
@@ -25,7 +23,6 @@ export default function Profile ({ route, navigation}) {
   const handlePreferences = () => {
     navigation.navigate('Preferences', { userId, userData, userStats, userPreferences });
   };
-  const profileIcon = '../assets/noun-profile.svg'
 
   useEffect(() => {
     onLogin(userId).then((data) => {
@@ -91,7 +88,7 @@ export default function Profile ({ route, navigation}) {
       </View>
     </View>
   )
-};
+}
 
 const styles = StyleSheet.create({
   container: {

@@ -1,9 +1,8 @@
-import React, {Component, useEffect} from "react";
 import {Text, View, StyleSheet} from 'react-native';
-import * as Font from 'expo-font';
 
 export default function Top() {
 
+  // TECH DEBT ------------
   /* async function loadFont() {
     await Font.loadAsync({
       'nconsolata': require('../assets/fonts/Inconsolata/static/Inconsolata_Condensed-Regular.ttf'),
@@ -21,7 +20,7 @@ export default function Top() {
       <Text style={styles.text}>The Ultimate Berlin Wohnungssuche</Text>
     </View>
     ); 
-  };
+  }
 
 
 const styles = StyleSheet.create({

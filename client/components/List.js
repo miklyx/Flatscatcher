@@ -1,10 +1,9 @@
 import React, {useEffect, useState} from "react";
 import { View,Text, StyleSheet, ScrollView, TouchableOpacity, TextInput, Image } from "react-native";
-import { Header } from "@react-navigation/stack";
 import { getFlats } from '../apiService';
 
 export default function List ({ route }) {
-  const {userId, userData} = route.params;
+  const {userData} = route.params;
   const [flats, setFlats] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
   const [visibleFlats, setVisibleFlats] = useState(30);
@@ -43,7 +42,9 @@ export default function List ({ route }) {
     return districtMatch || priceMatch || areaMatch;
   });
 
-  function getMaxPrice() {
+
+  //Tech debt------
+/*   function getMaxPrice() {
     const maxPrice = Math.max(...flats.map(flat => flat.price));
     return maxPrice;
   }
@@ -51,7 +52,8 @@ export default function List ({ route }) {
   function getMaxArea() {
     const maxArea = Math.max(...flats.map(flat => flat.size));
     return maxArea;
-  }
+  } */
+  //Tech debt------
 
   return (
     <View style={styles.container}>
@@ -115,7 +117,7 @@ export default function List ({ route }) {
       </ScrollView>
     </View>
   )
-};
+}
 
 const styles = StyleSheet.create({
   container: {

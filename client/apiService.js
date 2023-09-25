@@ -20,7 +20,7 @@ export async function onLogin (userId) {
   } catch (e) {
     console.log(e);
   }
-};
+}
 
 export async function getStats (userId) {
   try {
@@ -33,7 +33,7 @@ export async function getStats (userId) {
   } catch (e) {
     console.log(e);
   }
-};
+}
 
 export async function getPreferences (userId) {
   try {
@@ -46,7 +46,7 @@ export async function getPreferences (userId) {
   } catch (e) {
     console.log(e);
   }
-};
+}
 
 
 export async function getFlats () {
@@ -57,7 +57,7 @@ export async function getFlats () {
   } catch (e) {
     console.log('this is an catched error',e);
   }
-};
+}
 
 export async function onLogout () {
   try {
@@ -65,4 +65,4 @@ export async function onLogout () {
   } catch (e) {
     console.log(e);
   }
-};
+}

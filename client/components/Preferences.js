@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { View,Text, StyleSheet, TextInput, TouchableOpacity, Image, StatusBar} from "react-native";
-import Slider from "@react-native-community/slider";
 
 import moment from "moment";
 
-export default function Preferences ({ route, navigation}) {
+export default function Preferences ({ route }) {
   
   const {userId, userData, userStats, userPreferences} = route.params;
   const [updatedUserName, setUpdatedUserName] = useState(userData.first_name);
@@ -75,7 +74,7 @@ export default function Preferences ({ route, navigation}) {
       </View>
     </View>
   )
-};
+}
 
 const styles = StyleSheet.create({
   container: {
