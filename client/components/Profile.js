@@ -55,28 +55,43 @@ export default function Profile ({ route, navigation}) {
       
       <View style={styles.statsContainer}>
         <View style={styles.stats}>
-          <View style={styles.statBlock}>
-            <TouchableOpacity onPress={handlePreferences}>
+          <TouchableOpacity  style={styles.statBlock} onPress={handlePreferences}>
+            <View style={{flex:1, flexDirection:'row',alignItems:'center'}}>
+            
             {isLoaded && 
               <Image source={{uri: userData && userData.pic_url}}
-                    style={{width: 60, height: 120}} />   
+                    style={{width: 60, height: 120, marginTop: -20, marginLeft: 0 }} />   
               }
-            </TouchableOpacity>
-            <TouchableOpacity onPress={handlePreferences}>
+            {/* </TouchableOpacity>
+            <TouchableOpacity onPress={handlePreferences}> */}
               <View >
                 <Text style={styles.textProfileBlock} >Update</Text>
                 <Text style={styles.textProfileBlock}>Profile</Text>
               </View>
-            </TouchableOpacity>
+            
 
-          </View>
+            </View>
+          </TouchableOpacity>
           <View style={styles.statBlock}>
             {userStats && 
               <View>
-                <Text style={{fontWeight:'bold', marginTop: 2}}> Last visit: {moment(userStats.lastvisit).format('h:mm a, Do of MMMM YYYY')}</Text>
-                <Text style={{fontWeight:'bold', marginTop: 2}}> Total: {userStats.all}</Text>
-                <Text style={{fontWeight:'bold', marginTop: 2}}> New: {userStats.new}</Text>
-                <Text style={{fontWeight:'bold', marginTop: 2}}> Appied: {userStats.all}</Text>
+                <View style={styles.lastvisit}>
+                  <Text style={{fontWeight:'bold', marginTop: 2, color: '#7b656d'}}> Last visit:</Text>
+                  <Text style={styles.lastvisitdata}>{moment(userStats.lastvisit).format('h:mm a, Do of MMMM YYYY')}</Text>
+                  <Text style={{borderStyle:'solid'}}> </Text>
+                </View>
+                <View style={styles.otherstats}>
+                  <Text>
+                    <Text style={{fontWeight:'bold', marginTop: 0, color: '#7b656d'}}> Total: </Text>
+                    <Text style={{textAlign:'right'}}>{userStats.all}</Text>
+                  </Text>
+                  <Text>
+                    <Text style={{fontWeight:'bold', marginTop: 0, color: '#7b656d'}}> New: </Text><Text>{userStats.new}</Text>
+                  </Text>
+                  <Text>
+                    <Text style={{fontWeight:'bold', marginTop: 0, color: '#7b656d'}}> Appied: </Text><Text>{userStats.applied}</Text>
+                  </Text>
+                </View>
               </View>}
           </View>
         </View>
@@ -101,7 +116,7 @@ export default function Profile ({ route, navigation}) {
 const styles = StyleSheet.create({
   container: {
     /* paddingVertical: 20, */
-    backgroundColor: '#759AAB',
+    backgroundColor: '#5C4B51',
     flex: 1,
     flexDirection: 'column',
     alignItems: 'center',
@@ -109,14 +124,14 @@ const styles = StyleSheet.create({
   },
   title: {
     fontWeight: 'bold',
-    color: '#401F3E',
+    color: '#fbf8ea',
     fontSize: 28,
     marginBottom: 20,
   },
   statsContainer: {
     flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: 'flex-start',
+    justifyContent: 'flex-start',
     height: 200, 
     width: 450,
     marginTop: 20,
@@ -134,13 +149,13 @@ const styles = StyleSheet.create({
   statBlock: {
     flex: 1,
     flexDirection: 'row',
-    
     alignItems: 'center',
     height: 150,
+    maxHeight: 150,
     width: 150,
     maxWidth: 150,
-    color: '#401F3E',
-    backgroundColor: '#FAF2A1',
+    color: '#fbf8ea',
+    backgroundColor: '#fbf8ea',
     marginTop: 20,
     borderRadius: 35,
     padding: 15,
@@ -173,7 +188,7 @@ const styles = StyleSheet.create({
   searchText: {
     fontWeight: 'bold',
     marginTop: 10,
-    color: '#FAF2A1'
+    color: '#fbf8ea'
   },
   banner: {
     width: '100%',
@@ -184,5 +199,12 @@ const styles = StyleSheet.create({
   textProfileBlock: {
     fontWeight: 'bold',
     alignSelf: 'center',
+    color: '#7b656d'
+  }, 
+  lastvisit:{
+    alignItems: 'center'
+  },
+  otherstats: {
+    alignItems:'center'
   }
 });

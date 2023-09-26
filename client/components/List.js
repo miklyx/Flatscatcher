@@ -2,6 +2,7 @@ import React, {useEffect, useState} from "react";
 import { View,Text, StyleSheet, ScrollView, TouchableOpacity, TextInput, Image, Linking } from "react-native";
 //import { BouncyCheckbox } from 'react-native-bouncy-checkbox';
 //import {CheckBox } from '@fluentui/react-native'
+import DistrictList from "./DistrictList"; 
 import { getFlats, applyTo } from '../apiService';
 
 export default function List ({ route }) {
@@ -91,6 +92,7 @@ export default function List ({ route }) {
 
   } 
 
+  const options = ['KREUZBERG', 'MITTE', 'FRIEDRICHSHAIN'];
 
   //Tech debt------
 /*   function getMaxPrice() {
@@ -114,7 +116,7 @@ export default function List ({ route }) {
         {isLoaded &&
         <Text style={styles.profile}> This a list of flats for {userData.first_name} {userData.last_name}</Text>}
       </View>
-
+          
       <View style={styles.headerButtons}>
         <TouchableOpacity onPress={handleSearch}>
           <Text style={styles.headerButton}>Search</Text>
@@ -232,7 +234,7 @@ export default function List ({ route }) {
         */}
       </View>
       )}
-      
+      {/*<DistrictList options={options}/>*/}
       <ScrollView>
        {filteredFlats && sortedFlats(filteredFlats).slice(0, visibleFlats).map((flat) => (
         <View key={flat.id} style={[styles.flatBlock, flat.preferred === 1 ? styles.preferredFlat : null]}>
