@@ -12,7 +12,7 @@ export default function List ({ route }) {
   const [applied, setApplied] = useState(false);
   const [showSearchBlock, setShowSearchBlock] = useState(false);
   const [showSortBlock, setShowSortBlock] = useState(false);
-  const [sortOrder, setSortOrder] = useState('');
+  const [sortOrder, setSortOrder] = useState('default');
   const [searchDistrict, setSearchDistrict] = useState(''); 
   const [searchPrice, setSearchPrice] = useState(0); 
   const [searchArea, setSearchArea] = useState(0); 
@@ -135,13 +135,13 @@ export default function List ({ route }) {
           <TextInput
             style={styles.input}
             placeholder="Max Price"
-            value={searchPrice}
+            value={String(searchPrice)}
             onChangeText={text => setSearchPrice(text)}
           />
           <TextInput
             style={styles.input}
             placeholder="Min Area"
-            value={searchArea}
+            value={String(searchArea)}
             onChangeText={text => setSearchArea(text)}
           />
 
@@ -160,7 +160,48 @@ export default function List ({ route }) {
 
       {showSortBlock && (
         <View style={styles.searchBlock}>
-          <Text style={styles.sortLabel}>Sort:</Text>
+          <Text style={styles.sortLabel}>Sort by price:</Text>
+          <View style={styles.sortBlock}>
+              {sortOrder !== "ascending" ? (
+                <TouchableOpacity onPress={() => setSortOrder("ascending")} style={styles.sortBlock}>
+                  <View style={styles.circleInit}></View>
+                  <Text style={styles.sortButtonText}>  Ascending</Text>
+                </TouchableOpacity>
+              ) : (
+                <TouchableOpacity onPress={() => setSortOrder("ascending")} style={styles.sortBlock}>
+                  <View style={styles.circleActive}></View>
+                  <Text style={styles.activeSortButtonText}>  Ascending</Text>
+                </TouchableOpacity>
+              )}
+            </View>
+            <View style={styles.sortBlock}>
+              {sortOrder !== "descending" ? (
+                <TouchableOpacity onPress={() => setSortOrder("descending")} style={styles.sortBlock}>
+                  <View style={styles.circleInit}></View>
+                  <Text style={styles.sortButtonText}>  Descending</Text>
+                </TouchableOpacity>
+              ) : (
+                <TouchableOpacity onPress={() => setSortOrder("descending")} style={styles.sortBlock}>
+                  <View style={styles.circleActive}></View>
+                  <Text style={styles.activeSortButtonText}>  Descending</Text>
+                </TouchableOpacity>
+              )}
+            </View>
+            <View style={styles.sortBlock}>
+              {sortOrder !== "default" ? (
+                <TouchableOpacity onPress={() => setSortOrder("default")} style={styles.sortBlock}>
+                  <View style={styles.circleInit}></View>
+                  <Text style={styles.sortButtonText}>  Default</Text>
+                </TouchableOpacity>
+              ) : (
+                <TouchableOpacity onPress={() => setSortOrder("default")} style={styles.sortBlock}>
+                  <View style={styles.circleActive}></View>
+                  <Text style={styles.activeSortButtonText}>  Default</Text>
+                </TouchableOpacity>
+              )}
+            </View>
+
+          {/* ------------REMOVE---------------------
           <TouchableOpacity
             onPress={() => setSortOrder("ascending")}
             style={[
@@ -188,6 +229,7 @@ export default function List ({ route }) {
         >
           <Text style={styles.sortButtonText}>Default</Text>
         </TouchableOpacity>
+        */}
       </View>
       )}
       
@@ -297,4 +339,32 @@ const styles = StyleSheet.create({
     marginTop: 10,
     color: '#FAF2A1'
   },
+  sortButton: {
+    color: 'blue',
+  },
+  activeSortButton: {
+    color: 'red',
+  },
+  sortButtonText: {
+    color: 'blue',
+  },
+  activeSortButtonText: {
+    color: 'red',
+  }, 
+  circleInit: {
+    backgroundColor: 'gray',
+    borderRadius: 50,
+    height:17,
+    width:17,
+  },
+  circleActive: {
+    borderRadius: 50,
+    backgroundColor: 'red',
+    height:17,
+    width:17,
+  },
+  sortBlock: {
+    display: 'flex',
+    flexDirection: 'row',
+  }
 });
