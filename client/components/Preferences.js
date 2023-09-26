@@ -46,7 +46,7 @@ export default function Preferences ({ route }) {
             />
           </View>
           <View style={styles.profile}>
-          <Text style={{color:'#FAF2A1',margin: 15, fontSize:20, fontWeight: 'bold'}}>Update profile</Text>
+            <Text style={{color:'#fbf8ea',margin: 15, fontSize:20, fontWeight: 'bold'}}>Edit profile</Text>
             <TextInput
               style={styles.input}
               value={updatedUserName}
@@ -69,7 +69,7 @@ export default function Preferences ({ route }) {
             </View>
           </View>
           <View style={styles.preferences}>
-            <Text> This is last visit {moment(userStats.lastvisit).format('Do of MMMM YYYY, h:mm a')}</Text>
+            <Text style={{color:'#fbf8ea',margin: 15, fontSize:20, fontWeight: 'bold'}}>Edit flat preferences</Text>
             <TextInput
               style={styles.input}
               value={updatedDistrict}
@@ -104,24 +104,26 @@ const styles = StyleSheet.create({
   profile: {
     flex: 1,
     backgroundColor: '#401F3E', // 30% #401F3E
-    padding: 10,
-    justifyContent: "center",
+    padding: 0,
+    justifyContent: "flex-start",
     alignItems: 'center',
+    height: 200,
   },
   preferences: {
     flex: 1,
     backgroundColor: '#5C4B51', // 10% #FAF2A1
-    padding: 10,
-    justifyContent: "center",
+    padding: 0,
+    justifyContent: "flex-start",
     alignItems: 'center',
-
+    height: 200,
   },
   updateBlock: {
-    backgroundColor: '#FAF2A1',
+    backgroundColor: '#fbf8ea',
     borderRadius: 10,
     padding: 15,
     alignItems: 'center',
     margin: 15,
+    marginTop: 30,
     width: 150,
   },
   updateText: {
