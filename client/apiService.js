@@ -123,6 +123,7 @@ export async function updateProfile (firstName, lastName, phone, userId) {
 //TECH DEBT - FOR NOW UPDATES ALL BUT MATCHES ONLY DISTRICT - NEED DEBUG STORED FUNCTION updatepreferences() in DB
 export async function updateProfileMeta (maxPrice, minSize, district, userId) {
   try {
+    console.log(district)
     const responce = await fetch(`${URL}/profileMeta`, {
       method: "POST",
       headers: {"Content-Type" : 'application/json'},
