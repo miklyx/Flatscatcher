@@ -15,7 +15,8 @@ exports.getStats = async (user) => {
 exports.updataLoginMeta = async (user) => {
   const sql = 'select lastvisit, total, lastcnt, applied, user_id from updatemetafunc($1)';
   const values = [user.user_id];
-  //console.log(user);
+  
+  console.log('backend user model'+user);
   const res = await pool.query(sql,values);
   return res.rows;
 };

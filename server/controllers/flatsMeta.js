@@ -11,9 +11,9 @@ exports.getStats = async ctx => {
   }
 };
 
-exports.updateLoginMeta = async ctx => {
+exports.updateLoginMeta = async (ctx) => {
   try {
-    console.log(ctx.request.body)
+    console.log('backend controllers body:'+ctx.request.body.user_id)
     ctx.body = await flatsMeta.updataLoginMeta(ctx.request.body);
   } catch (e) {
     ctx.status = 500;

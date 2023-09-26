@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    backgroundColor: '#759AAB',
+    backgroundColor: '#5C4B51',
   },
   titletext: {
     color: 'red',
@@ -69,13 +69,13 @@ const styles = StyleSheet.create({
  },
  logtext: {
   fontWeight: "bold",
-  color: '#401F3E',
+  color: '#F3B562',
   },
   input: {
     width: 300,
     borderWidth: 1,
-    borderColor: '#401F3E',
-    backgroundColor: '#FAF2A1',
+    borderColor: '#F06060',
+    backgroundColor: '#8CBEB2',
     marginBottom: 10,
     padding: 5,
   },

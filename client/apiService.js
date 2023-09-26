@@ -50,12 +50,13 @@ export async function getPreferences (userId) {
 
 export async function updateProfilMetaOnLogin (userId) {
   try {
+    console.log('userID = '+userId)
     const responce = await fetch(`${URL}/login`, {
       method: "POST",
       headers: {"Content-Type" : 'application/json'},
-      body: {
+      body: JSON.stringify({
         user_id: userId
-      }
+      })
     });
     const data = await responce.json();
     return data;

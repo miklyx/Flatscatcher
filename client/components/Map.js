@@ -21,6 +21,7 @@ export default function Map ({ route }) {
   };
 
   const handleApply = () => {
+    
     alert('Applied!');
   };
 
