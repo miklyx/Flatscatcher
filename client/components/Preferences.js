@@ -31,10 +31,10 @@ export default function Preferences ({ route }) {
   return (
     <ScrollView
   contentContainerStyle={{ flexGrow: 1 }}
-  keyboardShouldPersistTaps="handled" // Обрабатывать касания только при активной клавиатуре
+  keyboardShouldPersistTaps="handled" 
 >
     <KeyboardAvoidingView
-      behavior={Platform.OS === "ios" ? "padding" : "height"} // Поднимать вверх на iOS, растягивать на Android
+      behavior={"padding"}//Platform.OS === "ios" ? "padding" : "height"} 
       style={{ flex: 1 }}
     >
         <View style={styles.container}>
@@ -110,7 +110,7 @@ const styles = StyleSheet.create({
   },
   preferences: {
     flex: 1,
-    backgroundColor: '#FAF2A1', // 10% #FAF2A1
+    backgroundColor: '#5C4B51', // 10% #FAF2A1
     padding: 10,
     justifyContent: "center",
     alignItems: 'center',

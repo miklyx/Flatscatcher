@@ -7,7 +7,6 @@ exports.getProfileMeta = async data => {
 };
 
 exports.updatePreferences = async data => {
-  console.log(data)
   const sql = 'select flat_id, preferred from updatepreferences($1, $2, $3, $4)';
   const values = [data.max_price , data.min_size, data.distr, data.user_id];
   return await pool.query(sql, values);

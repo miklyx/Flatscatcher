@@ -50,7 +50,6 @@ export async function getPreferences (userId) {
 
 export async function updateProfilMetaOnLogin (userId) {
   try {
-    console.log('userID = '+userId)
     const responce = await fetch(`${URL}/login`, {
       method: "POST",
       headers: {"Content-Type" : 'application/json'},
@@ -88,7 +87,6 @@ export async function getFlats () {
   try {
     const responce = await fetch(URL+'/flats')
     const data = await responce.json();
-    //console.log(data)
     return data;
   } catch (e) {
     console.log('this is an catched error',e);
