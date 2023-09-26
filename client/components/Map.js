@@ -7,6 +7,7 @@ import { Marker } from "react-native-maps";
 export default function Map ({ route }) {
   const {userData} = route.params;
   const [flats, setFlats] = useState([]);
+  const [applied, setApplied] = useState(false);
   const [visibleFlats, setVisibleFlats] = useState(30);
 
  useEffect(() => {
@@ -20,9 +21,35 @@ export default function Map ({ route }) {
     setVisibleFlats(prevVisibleFlats => prevVisibleFlats + 30);
   };
 
-  const handleApply = () => {
+  const handleApply = (flat) => {
+    console.log(flat)
+    console.log(userData.id)
+    applyTo(flat.id, userData.id).then(res => {
+      const updatedFlats = flats.map((item) => {
+        if (item.id === flat.id) {
+          console.log(item)
+          return { ...item, applied: true };
+        }
+        //console.log(item)
+        return item;
+      });
+      //console.log(updatedFlats);
+      setFlats(updatedFlats);
+  
+      console.log(res);
+    }) 
+    .catch((error) => {
+      console.error("Error applying:", error);
+    });
+    Linking.openURL('https://www.immobilienscout24.de/')// TECH DEBT - RESURRECT NEW FLATS FLOW flat.url)
+        .then(() => {
+            alert('Applied and opened the link!');
+          })
+        .catch((error) => {
+        console.error('Error opening the link:', error);
+          alert('Applied, but there was an error opening the link.');
+    });
     
-    alert('Applied!');
   };
 
   const filteredFlats = flats.filter(flat => flat.preferred === 1 && flat.longitude && flat.latitude)
@@ -94,9 +121,13 @@ export default function Map ({ route }) {
           <Text>{String(flat.price)}</Text>
           <Text>{String(flat.size)}</Text>
           <Text>{flat.address}</Text>
-          <TouchableOpacity style={styles.loadMoreButton} onPress={handleApply}>
+          {!flat.applied ? (
+          <TouchableOpacity style={styles.loadMoreButton} onPress={() => handleApply(flat)}>
             <Text>Apply?</Text>
-          </TouchableOpacity>
+          </TouchableOpacity>) : (
+          <Text style={{ color: 'gray' }}>Applied</Text>
+          )
+          }
         </View>
       
       ))} 

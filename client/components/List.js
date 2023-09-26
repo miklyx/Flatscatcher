@@ -1,5 +1,7 @@
 import React, {useEffect, useState} from "react";
 import { View,Text, StyleSheet, ScrollView, TouchableOpacity, TextInput, Image, Linking } from "react-native";
+//import { BouncyCheckbox } from 'react-native-bouncy-checkbox';
+//import {CheckBox } from '@fluentui/react-native'
 import { getFlats, applyTo } from '../apiService';
 
 export default function List ({ route }) {
@@ -14,7 +16,7 @@ export default function List ({ route }) {
   const [searchDistrict, setSearchDistrict] = useState(''); 
   const [searchPrice, setSearchPrice] = useState(0); 
   const [searchArea, setSearchArea] = useState(0); 
-  const [searchPreferred, setSearchPreferred] = useState('');
+  const [searchPreferred, setSearchPreferred] = useState(false);
 
  useEffect(() => {
    getFlats().then(res => {
@@ -74,7 +76,7 @@ export default function List ({ route }) {
     const districtMatch = searchDistrict === '' || flat.address.toLowerCase().includes(searchDistrict.toLowerCase());
     const priceMatch = searchPrice === '' || String(flat.price).includes(searchPrice);
     const areaMatch = searchArea === '' || String(flat.size).includes(searchArea);//<= String(flat.size) && String(flat.size) <= searchArea;
-    const preferredMatch = searchPreferred === "" || String(flat.preferred) === searchPreferred;
+    const preferredMatch = !searchPreferred || flat.preferred;
 
     return (districtMatch || priceMatch || areaMatch) && preferredMatch;
   });
@@ -142,12 +144,17 @@ export default function List ({ route }) {
             value={searchArea}
             onChangeText={text => setSearchArea(text)}
           />
-          <TextInput
-            style={styles.input}
-            placeholder="Preferred (0 or 1)"
-            value={searchPreferred}
-            onChangeText={(text) => setSearchPreferred(text)}
-          />
+
+          <View style={styles.checkboxContainer}>
+            {!searchPreferred ? (
+              <TouchableOpacity onPress={val => setSearchPreferred(!searchPreferred)}>
+                <Text style={styles.checkboxLabel}>Show Preferred only</Text>
+              </TouchableOpacity>) : (
+                <TouchableOpacity onPress={val => setSearchPreferred(!searchPreferred)}>
+                <Text style={styles.checkboxLabel}>Show All</Text>
+              </TouchableOpacity>
+              )}
+          </View>
         </View>
       )}
 
@@ -276,5 +283,18 @@ const styles = StyleSheet.create({
     height: 50, 
     resizeMode: 'cover', 
     
+  },
+  checkboxContainer: {
+    backgroundColor: '#401F3E',
+    borderRadius: 10,
+    padding: 15,
+    alignItems: 'center',
+    margin: 15,
+    width: 350,
+  },
+  checkboxLabel: {
+    fontWeight: 'bold',
+    marginTop: 10,
+    color: '#FAF2A1'
   },
 });

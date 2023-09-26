@@ -85,12 +85,12 @@ export default function Profile ({ route, navigation}) {
       <View style={styles.searchContainer}>
         <View style={styles.searchBlock}>
           <TouchableOpacity onPress={handleMap}>
-            <Text style={styles.searchText}>Map</Text>
+            <Text style={styles.searchText}>Map of your matched flats</Text>
           </TouchableOpacity>
         </View>
         <View style={styles.searchBlock}>
           <TouchableOpacity onPress={handleSearch}>
-            <Text style={styles.searchText}>List</Text>
+            <Text style={styles.searchText}>List of all flats</Text>
           </TouchableOpacity>
         </View>
       </View>
