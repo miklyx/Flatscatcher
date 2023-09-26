@@ -77,7 +77,7 @@ export default function Profile ({ route, navigation}) {
               <View>
                 <View style={styles.lastvisit}>
                   <Text style={{fontWeight:'bold', marginTop: 2, color: '#7b656d'}}> Last visit:</Text>
-                  <Text style={styles.lastvisitdata}>{moment(userStats.lastvisit).format('h:mm a, Do of MMMM YYYY')}</Text>
+                  <Text style={styles.lastvisitdata}>{moment(userStats.lastvisit).format('h:mm a, Do MMMM YYYY')}</Text>
                   <Text style={{borderStyle:'solid'}}> </Text>
                 </View>
                 <View style={styles.otherstats}>
@@ -100,7 +100,7 @@ export default function Profile ({ route, navigation}) {
       <View style={styles.searchContainer}>
         <View style={styles.searchBlock}>
           <TouchableOpacity onPress={handleMap}>
-            <Text style={styles.searchText}>Map of your matched flats</Text>
+            <Text style={styles.searchText}>Your matched flats on map</Text>
           </TouchableOpacity>
         </View>
         <View style={styles.searchBlock}>
@@ -180,14 +180,15 @@ const styles = StyleSheet.create({
   searchBlock: {
     backgroundColor: '#401F3E',
     borderRadius: 10,
-    padding: 15,
+    padding: 20,
     alignItems: 'center',
     margin: 15,
     width: 350,
   },
   searchText: {
     fontWeight: 'bold',
-    marginTop: 10,
+    fontSize: 20,
+    marginTop: 0,
     color: '#fbf8ea'
   },
   banner: {
@@ -203,6 +204,9 @@ const styles = StyleSheet.create({
   }, 
   lastvisit:{
     alignItems: 'center'
+  },
+  lastvisitdata: {
+    textAlign: 'center'
   },
   otherstats: {
     alignItems:'center'
