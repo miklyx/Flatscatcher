@@ -13,6 +13,5 @@ exports.getAll = async () => {
   where dm.adr is not null\
   order by clr.id desc'
   const res = await pool.query(sql)
-  //const res = await pool.query('SELECT id, image, url, title, price, size, rooms, address FROM clear order by "false" desc');
   return res.rows;
 };

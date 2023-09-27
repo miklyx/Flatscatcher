@@ -2,6 +2,8 @@ import React, {useEffect, useState} from "react";
 import { View,Text, StyleSheet, ScrollView, TouchableOpacity, TextInput, Image, Linking } from "react-native";
 //import { BouncyCheckbox } from 'react-native-bouncy-checkbox';
 //import {CheckBox } from '@fluentui/react-native'
+import DistrictList from "./DistrictList"; 
+//import Top from "./Top";
 import { getFlats, applyTo } from '../apiService';
 
 export default function List ({ route }) {
@@ -14,8 +16,8 @@ export default function List ({ route }) {
   const [showSortBlock, setShowSortBlock] = useState(false);
   const [sortOrder, setSortOrder] = useState('default');
   const [searchDistrict, setSearchDistrict] = useState(''); 
-  const [searchPrice, setSearchPrice] = useState(0); 
-  const [searchArea, setSearchArea] = useState(0); 
+  const [searchPrice, setSearchPrice] = useState(''); 
+  const [searchArea, setSearchArea] = useState(''); 
   const [searchPreferred, setSearchPreferred] = useState(false);
 
  useEffect(() => {
@@ -32,12 +34,9 @@ export default function List ({ route }) {
   };
 
   const handleApply = (flat) => {
-    console.log(flat)
-    console.log(userData.id)
     applyTo(flat.id, userData.id).then(res => {
       const updatedFlats = flats.map((item) => {
         if (item.id === flat.id) {
-          console.log(item)
           return { ...item, applied: true };
         }
         //console.log(item)
@@ -53,11 +52,11 @@ export default function List ({ route }) {
     });
     Linking.openURL('https://www.immobilienscout24.de/')// TECH DEBT - RESURRECT NEW FLATS FLOW flat.url)
         .then(() => {
-            alert('Applied and opened the link!');
+            console.log('Applied and opened the link!');
           })
         .catch((error) => {
         console.error('Error opening the link:', error);
-          alert('Applied, but there was an error opening the link.');
+        console.log('Applied, but there was an error opening the link.');
     });
     
   };
@@ -91,6 +90,7 @@ export default function List ({ route }) {
 
   } 
 
+  const options = ['KREUZBERG', 'MITTE', 'FRIEDRICHSHAIN'];
 
   //Tech debt------
 /*   function getMaxPrice() {
@@ -108,13 +108,13 @@ export default function List ({ route }) {
     <View style={styles.container}>
       <View>
         <Image
-        source={require('../assets/logo_dark.png')}
+        source={require('../assets/top_banner_light.png')}
         style={styles.banner}
         />
-        {isLoaded &&
-        <Text style={styles.profile}> This a list of flats for {userData.first_name} {userData.last_name}</Text>}
+        {/* {isLoaded &&
+        <Text style={styles.profile}> This a list of flats for {userData.first_name} {userData.last_name}</Text>} */}
       </View>
-
+          
       <View style={styles.headerButtons}>
         <TouchableOpacity onPress={handleSearch}>
           <Text style={styles.headerButton}>Search</Text>
@@ -128,20 +128,20 @@ export default function List ({ route }) {
         <View style={styles.searchBlock}>
           <TextInput
             style={styles.input}
-            placeholder="District"
+            placeholder="Enter beloved district"
             value={searchDistrict}
             onChangeText={text => setSearchDistrict(text)}
           />
           <TextInput
             style={styles.input}
-            placeholder="Max Price"
-            value={searchPrice}
+            placeholder="Your maximum Price"
+            value={String(searchPrice)}
             onChangeText={text => setSearchPrice(text)}
           />
           <TextInput
             style={styles.input}
-            placeholder="Min Area"
-            value={searchArea}
+            placeholder="Your minimum size of apartment"
+            value={String(searchArea)}
             onChangeText={text => setSearchArea(text)}
           />
 
@@ -161,8 +161,12 @@ export default function List ({ route }) {
       {showSortBlock && (
         <View style={styles.searchBlock}>
           <Text style={styles.sortLabel}>Sort by price:</Text>
+<<<<<<< HEAD
           
             <View style={styles.sortBlock}>
+=======
+          <View style={styles.sortBlock}>
+>>>>>>> commet_br
               {sortOrder !== "ascending" ? (
                 <TouchableOpacity onPress={() => setSortOrder("ascending")} style={styles.sortBlock}>
                   <View style={styles.circleInit}></View>
@@ -201,7 +205,21 @@ export default function List ({ route }) {
                 </TouchableOpacity>
               )}
             </View>
+<<<<<<< HEAD
 {/*-------REMOVE----------------------------------
+=======
+
+          {/* ------------REMOVE---------------------
+          <TouchableOpacity
+            onPress={() => setSortOrder("ascending")}
+            style={[
+              styles.sortButton,
+              sortOrder === "ascending" ? styles.activeSortButton : null,
+          ]}
+        >
+          <Text style={styles.sortButtonText}>Ascending</Text>
+        </TouchableOpacity>
+>>>>>>> commet_br
         <TouchableOpacity
           onPress={() => setSortOrder("descending")}
           style={[
@@ -219,23 +237,30 @@ export default function List ({ route }) {
           ]}
         >
           <Text style={styles.sortButtonText}>Default</Text>
+<<<<<<< HEAD
         </TouchableOpacity>*/}
  {/*-------REMOVE----------------------------------*/}
+=======
+        </TouchableOpacity>
+        */}
+>>>>>>> commet_br
       </View>
       )}
-      
+      {/*<DistrictList options={options}/>*/}
       <ScrollView>
        {filteredFlats && sortedFlats(filteredFlats).slice(0, visibleFlats).map((flat) => (
         <View key={flat.id} style={[styles.flatBlock, flat.preferred === 1 ? styles.preferredFlat : null]}>
-          <Text>{flat.title}</Text>
-          <Text>{flat.price}</Text>
-          <Text>{flat.size}</Text>
+          <Text style={{color:"#401F3E", fontStyle: 'italic', marginBottom:10}}>{flat.title}</Text>
+          <Text>{flat.price} €</Text>
+          <Text>{flat.size} m2</Text>
           <Text>{flat.address}</Text>
+        
           {!flat.applied ? (
+        
           <TouchableOpacity style={styles.loadMoreButton} onPress={() => handleApply(flat)}>
-            <Text>Apply?</Text>
+            <Text style={{fontWeight:'bold', color: '#401F3E', textAlign: 'right'}}>Apply to flat</Text>
           </TouchableOpacity>) : (
-          <Text style={{ color: 'gray' }}>Applied</Text>
+          <Text style={{fontWeight:'light', color: '#401F3E', textAlign: 'right'}}>Applied</Text>
           )
           }
         </View>
@@ -243,7 +268,7 @@ export default function List ({ route }) {
       ))} 
       {visibleFlats < filteredFlats.length && (
         <TouchableOpacity style={styles.loadMoreButton} onPress={loadMore}>
-          <Text style={styles.loadMoreText}>More..</Text>
+          <Text style={styles.loadMoreText}>Load more..</Text>
         </TouchableOpacity>
       )}
       </ScrollView>
@@ -253,7 +278,7 @@ export default function List ({ route }) {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#759AAB',
+    backgroundColor: '#5C4B51',
     flex: 1,
     flexDirection: 'column',
     justifyContent: 'center'
@@ -265,8 +290,12 @@ const styles = StyleSheet.create({
     width: 230,
     color: '#401F3E',
   },
+  flatBlockWrapper: {
+    display: 'flex',
+    flexDirection: 'row',
+  },
   flatBlock: {
-    backgroundColor: '#FAF2A1', 
+    backgroundColor: '#d9e9e5', 
     color: '#401F3E',
     borderWidth: 1, 
     borderColor: 'gray', 
@@ -276,52 +305,68 @@ const styles = StyleSheet.create({
     marginHorizontal: 15,
   },
   preferredFlat: {
-    backgroundColor: '#FAF2A1', 
+    backgroundColor: '#d9e9e5', 
     color: '#401F3E',
-    borderWidth: 1, 
-    borderColor: 'red', 
+    borderWidth: 5, 
+    borderColor: '#401F3E', 
     borderRadius: 5, 
     padding: 10, 
     marginVertical: 10,
     marginHorizontal: 15,
   },
-  loadMore: {
+  loadMoreButton: {
     fontWeight: 'bold',
+
+  },
+  loadMoreText: {
+    textAlign: 'center',
+    fontWeight: 'bold',
+    color: '#d9e9e5',
+    marginTop: 10,
+    marginBottom: 30,
   },
   headerButtons: {
+    
     flexDirection: 'row',
+    justifyContent: 'space-around'
   },
   headerButton: {
-    color: 'white',
-    marginRight: 10,
+    color: '#401F3E',
+    textAlign: 'center',
+    backgroundColor:'#d9e9e5', 
+    borderRadius: 2,
+    width: 80,
+    height: 22,
+    borderStyle:'solid',
+    
+    margin:10,
     fontWeight: 'bold',
   },
   searchBlock: {
-    backgroundColor: 'white',
+    backgroundColor: '#fbf8ea',
     padding: 10,
-    margin: 15,
+    margin: 10,
     borderRadius: 5,
   },
   input: {
     borderWidth: 1,
     borderColor: 'gray',
+    backgroundColor: '#d9e9e5',
     borderRadius: 5,
     padding: 5,
     marginBottom: 10,
   },
   banner: {
-    width: 50,
-    marginTop: 30,
-    marginLeft: 30,
-    height: 50, 
-    resizeMode: 'cover', 
-    
+    width: '100%',
+    height: 100, 
+    resizeMode: 'cover',
   },
   checkboxContainer: {
     backgroundColor: '#401F3E',
     borderRadius: 10,
-    padding: 15,
+    padding: 10,
     alignItems: 'center',
+<<<<<<< HEAD
     justifyContent: 'center',
     margin: 10,
     width: 100,
@@ -330,6 +375,16 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     
     color: '#FAF2A1'
+=======
+    margin: 0,
+    width: 250,
+  },
+  checkboxLabel: {
+    fontWeight: 'bold',
+    fontSize: 20,
+    marginTop: 0,
+    color: '#fbf8ea'
+>>>>>>> commet_br
   },
   sortButton: {
     color: 'blue',
@@ -338,10 +393,18 @@ const styles = StyleSheet.create({
     color: 'red',
   },
   sortButtonText: {
+<<<<<<< HEAD
     color: 'blue',
   },
   activeSortButtonText: {
     color: 'red',
+=======
+    color: '#401F3E',
+  },
+  activeSortButtonText: {
+    fontWeight: 'bold',
+    color: '#401F3E',
+>>>>>>> commet_br
   }, 
   circleInit: {
     backgroundColor: 'gray',
@@ -351,7 +414,11 @@ const styles = StyleSheet.create({
   },
   circleActive: {
     borderRadius: 50,
+<<<<<<< HEAD
     backgroundColor: 'red',
+=======
+    backgroundColor: '#401F3E',
+>>>>>>> commet_br
     height:17,
     width:17,
   },
@@ -359,5 +426,8 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
   }
+<<<<<<< HEAD
 
+=======
+>>>>>>> commet_br
 });

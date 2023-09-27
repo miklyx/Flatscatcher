@@ -10,24 +10,25 @@ const profileMeta = require('./controllers/profileMeta.js');
 
 
 
-router.get('/flats', flats.getAll);   //ok
-router.get('/stats', flatsMeta.getStats);  //ok 
-
-router.post('/login', flatsMeta.updateLoginMeta);  //also reloads data  //ok
-router.post('/logout', flatsMeta.updateLogoutMeta); // update when logout //ok
+router.get('/flats', flats.getAll);   //get all flats
+router.get('/stats', flatsMeta.getStats);   //get user's statistics
 
 
-router.get('/profile', profile.getProfile);  //ok
-router.get('/profileMeta', profileMeta.getProfileMeta);    //ok 
-
-router.post('/profile', profile.updateProfile);  //ok
-
-router.post('/profileMeta', profileMeta.updateProfileMeta); // also matches user's meta  //ok
+router.post('/login', flatsMeta.updateLoginMeta);  //also reloads metadata - new, applied to agg table 
+router.post('/logout', flatsMeta.updateLogoutMeta); // update when logout - set applied and preferred
 
 
-router.post('/apply', profileMeta.apply);
+router.get('/profile', profile.getProfile);  //get basic profile data
+router.get('/profileMeta', profileMeta.getProfileMeta);    //get data from profila preferences
 
-router.post('/coordinates', profileMeta.pushCoordinates);
+router.post('/profile', profile.updateProfile);  // update profile basic data in db
+
+router.post('/profileMeta', profileMeta.updateProfileMeta); // update profile preferences data and update metadata about flats - preferred
+
+
+router.post('/apply', profileMeta.apply);  // set flat as applied
+
+router.post('/coordinates', profileMeta.pushCoordinates); //this is experimental - see /service/getCoordinates.js
 
 
 module.exports = router;

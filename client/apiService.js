@@ -50,7 +50,6 @@ export async function getPreferences (userId) {
 
 export async function updateProfilMetaOnLogin (userId) {
   try {
-    console.log('userID = '+userId)
     const responce = await fetch(`${URL}/login`, {
       method: "POST",
       headers: {"Content-Type" : 'application/json'},
@@ -88,7 +87,6 @@ export async function getFlats () {
   try {
     const responce = await fetch(URL+'/flats')
     const data = await responce.json();
-    //console.log(data)
     return data;
   } catch (e) {
     console.log('this is an catched error',e);
@@ -125,6 +123,7 @@ export async function updateProfile (firstName, lastName, phone, userId) {
 //TECH DEBT - FOR NOW UPDATES ALL BUT MATCHES ONLY DISTRICT - NEED DEBUG STORED FUNCTION updatepreferences() in DB
 export async function updateProfileMeta (maxPrice, minSize, district, userId) {
   try {
+    console.log(district)
     const responce = await fetch(`${URL}/profileMeta`, {
       method: "POST",
       headers: {"Content-Type" : 'application/json'},

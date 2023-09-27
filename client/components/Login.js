@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {TextInput, Image, Text, View, StyleSheet, TouchableOpacity, StatusBar} from 'react-native';
+import {TextInput, Image, Text, View, StyleSheet, TouchableOpacity, StatusBar, KeyboardAvoidingView, ScrollView} from 'react-native';
 import { updateProfilMetaOnLogin } from "../apiService";
 
 import Top from "./Top";
@@ -22,30 +22,32 @@ export default function Login({ navigation }) {
   return (
     <View style={styles.container}>
       <StatusBar style="auto" />
-      <Image
-        source={require('../assets/top_banner_light.png')}
-        style={styles.banner}
-      />
-      <Top />
-      <View style={styles.logcontainer}>
-        <Text style={styles.titletext}></Text>
-        <Text style={styles.logtext}>Email:</Text>
-        <TextInput
-          style={styles.input}
-          placeholder="email"
-          onChangeText={(text) => setUsername(text)}
-        />
-        <Text style={styles.logtext}>Password:</Text>
-        <TextInput
-          style={styles.input}
-          placeholder="password"
-          onChangeText={(text) => setPassword(text)}
-        />
-        <TouchableOpacity style={styles.button} onPress={handleLogin}>
-          <Text style={{ color: '#FAF2A1', fontWeight: 'bold', fontSize: 16 }}>Login</Text>
-        </TouchableOpacity>
-      </View>
-    </View>
+        
+       
+          <Image
+            source={require('../assets/top_banner_light.png')}
+            style={styles.banner}
+          />
+          <Top />
+          <View style={styles.logcontainer}>
+            <Text style={styles.titletext}></Text>
+            <TextInput
+              style={styles.input}
+              placeholder="absolutely@homeless.de"
+              onChangeText={(text) => setUsername(text)}
+            />
+            <TextInput
+              style={styles.input}
+              placeholder="*********"
+              secureTextEntry={true}
+              onChangeText={(text) => setPassword(text)}
+            />
+            <TouchableOpacity style={styles.button} onPress={handleLogin}>
+              <Text style={{ color: '#fbf8ea', fontWeight: 'bold', fontSize: 16 }}>Login</Text>
+            </TouchableOpacity>
+          </View>
+      
+     </View>
   );
 }
 
@@ -69,13 +71,13 @@ const styles = StyleSheet.create({
  },
  logtext: {
   fontWeight: "bold",
-  color: '#F3B562',
+  color: '#fbf8ea',
   },
   input: {
     width: 300,
     borderWidth: 1,
-    borderColor: '#F06060',
-    backgroundColor: '#8CBEB2',
+    borderRadius: 5,
+    backgroundColor: '#d9e9e5',
     marginBottom: 10,
     padding: 5,
   },
@@ -84,8 +86,8 @@ const styles = StyleSheet.create({
     width: 300,
     alignItems: 'center',
     padding: 15,
-    borderRadius: 10,
-    marginTop: 100,
+    borderRadius: 8,
+    marginTop: 40,
   },
   banner: {
     width: '100%',

@@ -1,4 +1,5 @@
-//EXPRTIMENTAL - GET COORDINATES VIA EXTENAL API
+//EXPRTIMENTAL - GET COORDINATES VIA EXTENAL API for list of preferred appartments
+// run once/twice to enrich addresse with coordinates
 const { Pool } = require('pg');
 
 const pool = new Pool({
@@ -11,7 +12,7 @@ const pool = new Pool({
 
 module.exports = pool;
 
-
+//gets list of addresses from db
 const getAddressesFromDatabase = async () => {
   try {
     const sql = 'select clr.id, clr.address as adr\
@@ -41,7 +42,8 @@ const fetchCoordinatesForAddress = async (address) => {
     throw error;
   }
 };
-
+//calls external api to get coordinates - run carefully to not be blocked
+//it takes address string and return geo coordinates for it
 const getCoordinates = async (adr) => {
   try {
     const geoURL = 'https://api.geoapify.com/v1/geocode/search?text=';
@@ -58,6 +60,7 @@ const getCoordinates = async (adr) => {
   }
 };
 
+//this one pushes coordinats to flats meta table 
 const pushCoordinatesOnceModel = async (data) => {
   //console.log(data)
   const sql = 'update flatsmeta set latitude = $2, longitude = $3 where id = $1';
@@ -71,7 +74,7 @@ const pushCoordinatesOnceModel = async (data) => {
   }
 };
 
-
+//this is a main function to compose everything over it
 const fetchAndStoreData = async () => {
   try {
     const addresses = await getAddressesFromDatabase();
@@ -89,5 +92,5 @@ const fetchAndStoreData = async () => {
   }
 };
 
-
+//damn run it
 fetchAndStoreData();
