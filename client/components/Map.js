@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import { View,Text, StyleSheet, ScrollView, TouchableOpacity, Image } from "react-native";
 import MapView from "react-native-maps";
-import { getFlats, getCoordinates, pushCoordinates } from '../apiService';
+import { getFlats, applyTo } from '../apiService';
 import { Marker } from "react-native-maps";
 
 export default function Map ({ route }) {
@@ -16,7 +16,6 @@ export default function Map ({ route }) {
    getFlats().then(res => {
       setFlats(res);
     })
-    //flat.fulladr
   },[])
 
   const loadMore = () => {
@@ -29,18 +28,13 @@ export default function Map ({ route }) {
   };
 
   const handleApply = (flat) => {
-    console.log(flat)
-    console.log(userData.id)
     applyTo(flat.id, userData.id).then(res => {
       const updatedFlats = flats.map((item) => {
         if (item.id === flat.id) {
-          console.log(item)
           return { ...item, applied: true };
         }
-        //console.log(item)
         return item;
       });
-      //console.log(updatedFlats);
       setFlats(updatedFlats);
   
       console.log(res);
@@ -61,43 +55,13 @@ export default function Map ({ route }) {
 
   const filteredFlats = flats.filter(flat => flat.preferred === 1 && flat.longitude && flat.latitude)
   filteredFlats.slice(0, 5)
-  //----TECH DEBT -- too much data everuthing f*s up
-  /* filteredFlats.slice(0, 15).map(flat => {
-    if (!flat.latitude) {
-      //---------try?---------
-      try {
-
-        getCoordinates(flat.id, flat.fulladr).then(res => {
-          if (Array.isArray(res)) {const [longitude, latitude] = res}
-          pushCoordinates(flat.id, userData.id, latitude, longitude)
-          setFlats((prevFlats) => {
-            const updatedFlats = prevFlats.map((item) => {
-              if (item.id === flat.id) {
-                return {
-                  ...item,
-                  latitude: latitude,
-                  longitude: longitude,
-                };
-              }
-              return item;
-            });
-            return updatedFlats;
-          });
-            
-          //pushCoordinates(flat.id, userData.id, latitude, longitude)
-        })
-        //---- end try ------
-    } catch (e) {
-      console.log.log(e)
-    }
-  }
-}) */
 
   return (
     <View style={styles.container}>
       <MapView 
         style={styles.map} 
         initialRegion={{
+          /*TECH DEBT - take central coordinated of district or first flat in list or whatever  */
           latitude: 52.498570832573186, 
           longitude: 13.406639494389717,
           latitudeDelta: 0.05,

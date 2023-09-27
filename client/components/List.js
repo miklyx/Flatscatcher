@@ -1,9 +1,5 @@
 import React, {useEffect, useState} from "react";
 import { View,Text, StyleSheet, ScrollView, TouchableOpacity, TextInput, Image, Linking } from "react-native";
-//import { BouncyCheckbox } from 'react-native-bouncy-checkbox';
-//import {CheckBox } from '@fluentui/react-native'
-import DistrictList from "./DistrictList"; 
-//import Top from "./Top";
 import { getFlats, applyTo } from '../apiService';
 
 export default function List ({ route }) {
@@ -22,7 +18,6 @@ export default function List ({ route }) {
 
  useEffect(() => {
    getFlats().then(res => {
-    //console.log(res)
       setFlats(res);
       setIsLoaded(true);
 
@@ -39,10 +34,8 @@ export default function List ({ route }) {
         if (item.id === flat.id) {
           return { ...item, applied: true };
         }
-        //console.log(item)
         return item;
       });
-      //console.log(updatedFlats);
       setFlats(updatedFlats);
   
       console.log(res);
@@ -90,9 +83,8 @@ export default function List ({ route }) {
 
   } 
 
-  const options = ['KREUZBERG', 'MITTE', 'FRIEDRICHSHAIN'];
 
-  //Tech debt------
+  //Tech debt - sorting and filtering by numeric values of price and size ------
 /*   function getMaxPrice() {
     const maxPrice = Math.max(...flats.map(flat => flat.price));
     return maxPrice;
@@ -161,12 +153,7 @@ export default function List ({ route }) {
       {showSortBlock && (
         <View style={styles.searchBlock}>
           <Text style={styles.sortLabel}>Sort by price:</Text>
-<<<<<<< HEAD
-          
-            <View style={styles.sortBlock}>
-=======
           <View style={styles.sortBlock}>
->>>>>>> commet_br
               {sortOrder !== "ascending" ? (
                 <TouchableOpacity onPress={() => setSortOrder("ascending")} style={styles.sortBlock}>
                   <View style={styles.circleInit}></View>
@@ -205,9 +192,6 @@ export default function List ({ route }) {
                 </TouchableOpacity>
               )}
             </View>
-<<<<<<< HEAD
-{/*-------REMOVE----------------------------------
-=======
 
           {/* ------------REMOVE---------------------
           <TouchableOpacity
@@ -219,7 +203,6 @@ export default function List ({ route }) {
         >
           <Text style={styles.sortButtonText}>Ascending</Text>
         </TouchableOpacity>
->>>>>>> commet_br
         <TouchableOpacity
           onPress={() => setSortOrder("descending")}
           style={[
@@ -237,13 +220,8 @@ export default function List ({ route }) {
           ]}
         >
           <Text style={styles.sortButtonText}>Default</Text>
-<<<<<<< HEAD
-        </TouchableOpacity>*/}
- {/*-------REMOVE----------------------------------*/}
-=======
         </TouchableOpacity>
         */}
->>>>>>> commet_br
       </View>
       )}
       {/*<DistrictList options={options}/>*/}
@@ -366,16 +344,6 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     padding: 10,
     alignItems: 'center',
-<<<<<<< HEAD
-    justifyContent: 'center',
-    margin: 10,
-    width: 100,
-  },
-  checkboxLabel: {
-    fontWeight: 'bold',
-    
-    color: '#FAF2A1'
-=======
     margin: 0,
     width: 250,
   },
@@ -384,7 +352,6 @@ const styles = StyleSheet.create({
     fontSize: 20,
     marginTop: 0,
     color: '#fbf8ea'
->>>>>>> commet_br
   },
   sortButton: {
     color: 'blue',
@@ -393,18 +360,11 @@ const styles = StyleSheet.create({
     color: 'red',
   },
   sortButtonText: {
-<<<<<<< HEAD
-    color: 'blue',
-  },
-  activeSortButtonText: {
-    color: 'red',
-=======
     color: '#401F3E',
   },
   activeSortButtonText: {
     fontWeight: 'bold',
     color: '#401F3E',
->>>>>>> commet_br
   }, 
   circleInit: {
     backgroundColor: 'gray',
@@ -414,11 +374,7 @@ const styles = StyleSheet.create({
   },
   circleActive: {
     borderRadius: 50,
-<<<<<<< HEAD
-    backgroundColor: 'red',
-=======
     backgroundColor: '#401F3E',
->>>>>>> commet_br
     height:17,
     width:17,
   },
@@ -426,8 +382,4 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
   }
-<<<<<<< HEAD
-
-=======
->>>>>>> commet_br
 });

@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { View,Text, StyleSheet, TouchableOpacity, Image, StatusBar } from "react-native";
 import moment from "moment";
-//import { Notifications } from "react-native-notifications";
-//import { PushNotification } from "react-native";
 
 import { onLogin, getStats, getPreferences } from '../apiService';
 
@@ -29,14 +27,10 @@ export default function Profile ({ route, navigation}) {
     onLogin(userId).then((data) => {
       setUserData(data);
       setIsLoaded(true);
-      //Notifications.registerRemoteNotifications().then(data => console.log(data))
-      
-      
     });
     
     getStats(userId).then((data) => {
       setUserStats(data);
-      //console.log(data);
     });
     getPreferences(userId).then((data) => {
       setUserPreferences(data);
@@ -50,13 +44,6 @@ export default function Profile ({ route, navigation}) {
         source={require('../assets/top_banner_light.png')}
         style={styles.banner}
       />
-      
-      {/* {isLoaded && 
-      <Text style={styles.title}> {userData.first_name} {userData.last_name}</Text>}
-      {isLoaded &&
-      <Text style={styles.title}> {userData.email}</Text>} */}
-      
-      
       <View style={styles.statsContainer}>
         <View style={styles.stats}>
           <TouchableOpacity  style={styles.statBlock} onPress={handlePreferences}>
@@ -66,8 +53,6 @@ export default function Profile ({ route, navigation}) {
               <Image source={{uri: userData && userData.pic_url}}
                     style={{width: 60, height: 120, marginTop: -20, marginLeft: 0 }} />   
               }
-            {/* </TouchableOpacity>
-            <TouchableOpacity onPress={handlePreferences}> */}
               <View >
                 <Text style={styles.textProfileBlock} >Update</Text>
                 <Text style={styles.textProfileBlock}>Profile</Text>
@@ -119,12 +104,10 @@ export default function Profile ({ route, navigation}) {
 
 const styles = StyleSheet.create({
   container: {
-    /* paddingVertical: 20, */
     backgroundColor: '#5C4B51',
     flex: 1,
     flexDirection: 'column',
     alignItems: 'center',
-    /* justifyContent: 'center', */
   },
   title: {
     fontWeight: 'bold',

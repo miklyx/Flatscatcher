@@ -1,14 +1,19 @@
 import React, {useState} from "react";
-import {TextInput, Image, Text, View, StyleSheet, TouchableOpacity, StatusBar, KeyboardAvoidingView, ScrollView} from 'react-native';
+import {TextInput, Image, Text, View, StyleSheet, TouchableOpacity, StatusBar} from 'react-native';
 import { updateProfilMetaOnLogin } from "../apiService";
 
 import Top from "./Top";
 
 export default function Login({ navigation }) {
   const [username, setUsername] = useState('');
+
+  //TECH DEBT - authorization
   const [password, setPassword] = useState('');
 
   const handleLogin = () => {
+
+      //TECH DEBT - authorization
+
     const email = username;
     const userId=1;
     updateProfilMetaOnLogin(userId).then((data) => {
@@ -59,8 +64,7 @@ const styles = StyleSheet.create({
   },
   titletext: {
     color: 'red',
-/*     marginLeft: 50,
- */  },
+  },
   logcontainer: {
     fontWeight: "bold",
     justifyContent: 'space-around',

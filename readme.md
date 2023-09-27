@@ -29,6 +29,12 @@ Take a look at `controllers/index.js` file to find settings for your database co
 Database is provided in file `flatscatcher.sql` - this is a simple postgres dump file which can be restored to your database.
 It contains _schema_ with needed _tables_, stored _functions_ to run this app.
 
+## Underwater part
+
+> [!WARNING]
+> This app uses a data gathered by another app - it parses immobilienscout24, > > > kleinanzeigen, wg-gesucht and immowelt for new appartments and sends it to local > sqlite and to telegram messenger. Underwater part contains prepare of that data > and push it into `clear` table in DB of app. This one for now is broken,
+> but if you are ready to parse this websites or another and push data to bd - fix > the data flow - this would be nice.
+
 ## Tips and flow
 
 > [!NOTE]
@@ -40,4 +46,14 @@ In beginning database contains lack of data - there is a `/server/service/getCoo
 for apartment list provided - for now only for preferred apartments.
 
 
+### What better have also
 
+* Authorization
+* Automatic get coordiantes from external api
+* Search by price, size
+* Sort by price, size
+* Apply - open URL of appartment (has in properties) 
+ problem is that apartments coud be not actual in 10 minuses, especially in immobilienscout24.
+ * Generate selbauskunft - letter to landlord with your data
+ * Get push notification when new apartment comes to database
+ * tbd

@@ -2,8 +2,6 @@ import React, { useState } from "react";
 import { View,Text, StyleSheet, TextInput, TouchableOpacity, Image, StatusBar, ScrollView, KeyboardAvoidingView} from "react-native";
 import { updateProfile, updateProfileMeta } from "../apiService";
 
-import moment from "moment";
-
 export default function Preferences ({ route }) {
   
   const {userId, userData, userStats, userPreferences} = route.params;
@@ -20,21 +18,15 @@ export default function Preferences ({ route }) {
   const handleUpdateUser = () => {
     updateProfile(updatedUserName, updatedUserLName, updatedUserPhone, userData.id)
     updateProfileMeta(updatedMaxPrice, updatedMinSize, updatedDistrict, userData.id)
-    //alert('updated!');
-  }
-
-  const handleUpdatePreferences = () => {
-    updateProfileMeta(updatedMaxPrice, updatedMinSize, updatedDistrict, userData.id)
-    //push to db
   }
   
   return (
     <ScrollView
-  contentContainerStyle={{ flexGrow: 1 }}
-  keyboardShouldPersistTaps="handled" 
->
+      contentContainerStyle={{ flexGrow: 1 }}
+      keyboardShouldPersistTaps="handled" 
+    >
     <KeyboardAvoidingView
-      behavior={"padding"}//Platform.OS === "ios" ? "padding" : "height"} 
+      behavior={"padding"}//Platform.OS === "ios" ? "padding" : "height"} - needs to be tested 
       style={{ flex: 1 }}
     >
         <View style={styles.container}>
@@ -96,14 +88,14 @@ export default function Preferences ({ route }) {
 const styles = StyleSheet.create({
   container: {
     marginTop: 30,
-    backgroundColor: '#759AAB', // 60% #759AAB
+    backgroundColor: '#759AAB', 
     flex: 1,
     flexDirection: 'column',
     justifyContent: 'center'
   },
   profile: {
     flex: 1,
-    backgroundColor: '#401F3E', // 30% #401F3E
+    backgroundColor: '#401F3E', 
     padding: 0,
     justifyContent: "flex-start",
     alignItems: 'center',
@@ -111,7 +103,7 @@ const styles = StyleSheet.create({
   },
   preferences: {
     flex: 1,
-    backgroundColor: '#5C4B51', // 10% #FAF2A1
+    backgroundColor: '#5C4B51', 
     padding: 0,
     justifyContent: "flex-start",
     alignItems: 'center',

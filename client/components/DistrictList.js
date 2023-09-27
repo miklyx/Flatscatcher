@@ -1,3 +1,6 @@
+//EXPERIMENTAL - custom component to have a district list in dropdown menu to select one or many
+
+
 import React, { useState } from 'react';
 import { ScrollView, TouchableOpacity, StyleSheet, View } from 'react-native';
 
@@ -8,6 +11,7 @@ export default function DistrictList ({options}) {
     setIsDropdownOpen(!isDropdownOpen);
   };
 
+  /* TECH DEBT - tried to implement dropdown when selecting a district - not working
   const renderOptions = () => {
     return options.map((option, index) => (
       <TouchableOpacity
@@ -18,7 +22,7 @@ export default function DistrictList ({options}) {
         <Text>{option}</Text>
       </TouchableOpacity>
     ));
-  };
+  }; */
 
   return (
     <View>
@@ -59,6 +63,7 @@ const styles = StyleSheet.create({
     height: 200,
   },
 });
+  // TECH DEBT - tried to implement dropdown when selecting a district - not working
 
   //const options = ['KREUZBERG', 'MITTE', 'FRIEDRICHSHAIN'];
 

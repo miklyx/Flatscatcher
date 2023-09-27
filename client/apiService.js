@@ -1,11 +1,3 @@
-/* import { NetworkInfo } from 'react-native-network-info'
-
-NetworkInfo.getGatewayIPAddress().then(defaultGateway => {
-  console.log(defaultGateway);
-}); */
-//console.log(defaultGW)
-
-//const URL=`${defaultGateWay}:3003`
 
 const URL = 'http://10.0.2.2:3003'//'http://192.168.178.1:3003'//'http://10.0.2.2:3003'  //this is an address of gateway of virtual device network
 
@@ -93,6 +85,7 @@ export async function getFlats () {
   }
 }
 
+//TECH DEBT - need to update dat in DB when logging out
 export async function onLogout () {
   try {
     console.log('logged out');
@@ -120,6 +113,7 @@ export async function updateProfile (firstName, lastName, phone, userId) {
     console.log(e);
   }
 }
+
 //TECH DEBT - FOR NOW UPDATES ALL BUT MATCHES ONLY DISTRICT - NEED DEBUG STORED FUNCTION updatepreferences() in DB
 export async function updateProfileMeta (maxPrice, minSize, district, userId) {
   try {
@@ -140,6 +134,8 @@ export async function updateProfileMeta (maxPrice, minSize, district, userId) {
     console.log(e);
   }
 }
+
+//EXPERIMENTAL - see /server/service/getCoordinates.js
 export async function getCoordinates (flatId, adr) {
   try {
     const geoURL = 'https://api.geoapify.com/v1/geocode/search?text='
@@ -155,7 +151,7 @@ export async function getCoordinates (flatId, adr) {
   }
 }
 
-
+//EXPERIMENTAL - see /server/service/getCoordinates.js
 export async function pushCoordinates (flatId, userId, latitude, longtitude) {
   try {
     const responce = await fetch(`${URL}/coordinates`, {
