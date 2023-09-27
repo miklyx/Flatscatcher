@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { View,Text, StyleSheet, TouchableOpacity, Image, StatusBar } from "react-native";
 import moment from "moment";
-
+//import { Notifications } from "react-native-notifications";
+//import { PushNotification } from "react-native";
 
 import { onLogin, getStats, getPreferences } from '../apiService';
 
@@ -23,11 +24,14 @@ export default function Profile ({ route, navigation}) {
   const handlePreferences = () => {
     navigation.navigate('Preferences', { userId, userData, userStats, userPreferences });
   };
-
+  
   useEffect(() => {
     onLogin(userId).then((data) => {
       setUserData(data);
       setIsLoaded(true);
+      //Notifications.registerRemoteNotifications().then(data => console.log(data))
+      
+      
     });
     
     getStats(userId).then((data) => {
