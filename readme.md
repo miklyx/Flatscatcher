@@ -62,4 +62,7 @@ for apartment list provided - for now only for preferred apartments.
  problem is that apartments coud be not actual in 10 minuses, especially in immobilienscout24.
  * Generate selbauskunft - letter to landlord with your data
  * Get push notification when new apartment comes to database
+ * Check if apartment still exists on website
+ * Try to fix underwater part - we need frash data! -  or do it with another approach - 
+ There's a bot in telegram which works perfectly - https://t.me/berlin_apartment_bot - but i can't find its source code. Idea is to run your own small telegram client and grab messages directly from it to the database.
  * tbd
