@@ -10,6 +10,45 @@ It contains _server_ side, _client_ side and _database_.
 
 <img src='screenshots/list.png' height=300>        <img src='screenshots/list_sort.png' height=300>         <img src='screenshots/map.png' height=300>
 
+## Getting started
+
+1. Clone this repo and enter!
+
+```
+git clone git@github.com:miklyx/Flatscatcher.git
+cd Flatscatcher
+```
+
+2. Install dependencies both for `server` and `client`
+
+```
+cd server 
+npm i
+
+cd client 
+npm i
+```
+
+3. Unpack database file `flathunter.sql.zip` and restore it in db
+
+4. Run server
+
+```
+cd server
+nodemon index.js
+```
+
+5. Run client
+
+```
+cd client
+expo start --tunnel
+```
+
+6. Scan QR code with expo application and explore application.
+
+
+# This was built with
 
 ## Frontend
 
