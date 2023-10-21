@@ -19,48 +19,6 @@ git clone git@github.com:miklyx/Flatscatcher.git
 cd Flatscatcher
 ```
 
-2. Install dependencies both for `server` and `client`
-
-```
-cd server 
-npm i
-
-cd client 
-npm i
-```
-
-3. Unpack database file `flathunter.sql.zip` and restore it in db
-
-4. Run server
-
-```
-cd server
-nodemon index.js
-```
-
-5. Run client
-
-```
-cd client
-expo start --tunnel
-```
-
-6. Scan QR code with expo application and explore application.
-
-
-# This was built with
-
-## Frontend
-
-Frontend built on _react native_ framework. To run it install dependencies from `/client` folder by running `npm i` command.
-Then run `npm start` to start the app.
-
-It's easy to see application in mobile app emulator - you will need to install _android studio_ with android phone simulator and/or _xcode_ with iphone simulator.
-
-> [!NOTE]
-> I would recommend you also have _Emulator_ extension installed in your VSCode.
-
-Take a look inside `apiService.js` file to locate backend api URL - when you will run it in emulator this must be the value of a _gateway_ of your virtual network.
 
 ## Backend
 
@@ -68,6 +26,22 @@ Backend built on _koa server_
 
 Backend located inside _/server_ folder. To install dependencies run `npm i` command from it and then `nodemon index.js` to run your database.
 Take a look at `controllers/index.js` file to find settings for your database connection.
+
+## Frontend
+
+Frontend built on _react native_ framework. To run it install dependencies from `/client` folder by running `npm i` command.
+Then run `npm start` to start the app.
+
+Scan QR code with expo application and explore application.
+
+It's easy to see application in mobile app emulator - you will need to install _android studio_ with android phone simulator and/or _xcode_ with iphone simulator.
+
+
+> [!NOTE]
+> I would recommend you also have _Emulator_ extension installed in your VSCode.
+
+Take a look inside `apiService.js` file to locate backend api URL - when you will run it in emulator this must be the value of a _gateway_ of your virtual network.
+
 
 ## Database
 
