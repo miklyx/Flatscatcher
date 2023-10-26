@@ -51,8 +51,8 @@ It contains _schema_ with needed _tables_, stored _functions_ to run this app.
 ## Underwater part
 
 > [!WARNING]
-> This app uses a data gathered by another app - it parses immobilienscout24, > > > kleinanzeigen, wg-gesucht and immowelt for new appartments and sends it to local > sqlite and to telegram messenger. Underwater part contains prepare of that data > and push it into `clear` table in DB of app. This one for now is broken,
-> but if you are ready to parse this websites or another and push data to bd - fix > the data flow - this would be nice.
+> This app uses a data gathered by another app - it parses immobilienscout24, > > > kleinanzeigen, wg-gesucht and immowelt for new appartments and sends it to local > sqlite and to telegram messenger. Underwater part contains prepare of that data > and push it into `clear` table in DB of app.
+Underwater part lives [here](https://github.com/miklyx/Flathunter_with_extensions). For now it's not deployed yet, but has a stable flow of incoming data.
 
 ## Tips and flow
 
@@ -76,6 +76,4 @@ for apartment list provided - for now only for preferred apartments.
  * Generate selbauskunft - letter to landlord with your data
  * Get push notification when new apartment comes to database
  * Check if apartment still exists on website
- * Try to fix underwater part - we need frash data! -  or do it with another approach - 
- There's a bot in telegram which works perfectly - https://t.me/berlin_apartment_bot - but i can't find its source code. Idea is to run your own small telegram client and grab messages directly from it to the database.
- * tbd
+
