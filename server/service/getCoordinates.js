@@ -1,16 +1,9 @@
 //EXPRTIMENTAL - GET COORDINATES VIA EXTENAL API for list of preferred appartments
-// run once/twice to enrich addresse with coordinates
-const { Pool } = require('pg');
+// run once/twice to enrich addresse with coordinatesconst { Pool } = require('pg');
+const dotenv = require('dotenv');
+const pool = require('../models/index')
 
-const pool = new Pool({
-  user: 'flathunter',
-  host: 'localhost',
-  database: 'flathunter',
-  password: 'flathunter',
-  port: 5432
-});
-
-module.exports = pool;
+dotenv.config({path:'../../.env'})
 
 //gets list of addresses from db
 const getAddressesFromDatabase = async () => {
@@ -46,8 +39,8 @@ const fetchCoordinatesForAddress = async (address) => {
 //it takes address string and return geo coordinates for it
 const getCoordinates = async (adr) => {
   try {
-    const geoURL = 'https://api.geoapify.com/v1/geocode/search?text=';
-    const apiAdr = 'apiKey=eee1cb95010b46c495452f1642cc866d';
+    const geoURL = process.env.GEOURL;
+    const apiAdr = process.env.GEOAPI;
     const response = await fetch(`${geoURL}${adr}&${apiAdr}`, {
       method: "GET",
       headers: { "Content-Type": 'application/json' },

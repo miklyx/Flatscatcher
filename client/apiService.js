@@ -1,5 +1,4 @@
-
-const URL = 'http://10.0.2.2:3003'//'http://192.168.178.1:3003'//'http://10.0.2.2:3003'  //this is an address of gateway of virtual device network
+const URL = process.env.BE_URL;
 
 export async function onLogin (userId) {
   try {
