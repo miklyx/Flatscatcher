@@ -1,11 +1,14 @@
 const { Pool } = require('pg');
+const dotenv = require('dotenv');
+
+dotenv.config({path:'../../.env'})
 
 const pool = new Pool({
-  user: 'flathunter',
-  host: 'localhost',
-  database: 'flathunter',
-  password: 'flathunter',
-  port: 5432
+  user: process.env.PG_USER,
+  host: process.env.PG_HOST,
+  database: process.env.PG_DB,
+  password: process.env.PG_PWD,
+  port: process.env.PG_PORT
 });
 
 module.exports = pool;
