@@ -1,19 +1,9 @@
 //EXPRTIMENTAL - GET COORDINATES VIA EXTENAL API for list of preferred appartments
-// run once/twice to enrich addresse with coordinates
-const { Pool } = require('pg');
+// run once/twice to enrich addresse with coordinatesconst { Pool } = require('pg');
 const dotenv = require('dotenv');
+const pool = require('../models/index')
 
 dotenv.config({path:'../../.env'})
-
-const pool = new Pool({
-  user: process.env.PG_USER,
-  host: process.env.PG_HOST,
-  database: process.env.PG_DB,
-  password: process.env.PG_PWD,
-  port: process.env.PG_PORT
-});
-
-module.exports = pool;
 
 //gets list of addresses from db
 const getAddressesFromDatabase = async () => {
