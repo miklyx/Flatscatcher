@@ -8,9 +8,9 @@ services:
     volumes:
       - /var/lib/docker/volumes/1888f45426644f87046780a835b99da3a894f566bae017cffc4da05e74a034d6/_data:/var/lib/postgresql/data
     environment:
-      POSTGRES_USER: flathunter
-      POSTGRES_PASSWORD: flathunter
-      POSTGRES_DB: flathunter
+      POSTGRES_USER: ${PG_USER}
+      POSTGRES_PASSWORD: ${PG_PWD}
+      POSTGRES_DB: ${PG_DB}
 
   server-flathunter:
     image: koa-server
