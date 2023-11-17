@@ -1,0 +1,50 @@
+version: '3.9'
+
+services:
+  database-flathunter:
+    image: postgres:15
+    ports:
+      - 5432:5432
+    volumes:
+      - /var/lib/docker/volumes/1888f45426644f87046780a835b99da3a894f566bae017cffc4da05e74a034d6/_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: ${PG_USER}
+      POSTGRES_PASSWORD: ${PG_PWD}
+      POSTGRES_DB: ${PG_DB}
+
+  server-flathunter:
+    image: koa-server
+    depends_on: 
+      - database-flathunter
+    ports:
+      - 3003:3003
+    volumes:
+      - ./server:/server
+    environment:
+      NODE_ENV: production
+    build:
+      dockerfile: Dockerfile
+
+  py-service:
+    image: py_service
+    depends_on:
+      - database-flathunter
+    volumes:
+      - ./py_service:/py_service
+    environment:
+      - PY_API_ID=${PY_API_ID}
+      - PY_API_HASH=${PY_API_HASH}
+      - PY_PHONE_NUMBER=${PY_PHONE_NUMBER}
+      - PY_CHANNEL_USERNAME=${PY_CHANNEL_USERNAME}
+      - PY_DATABASE_URL=${PY_DATABASE_URL}
+    build:
+      args:
+        PY_API_ID: ${PY_API_ID}
+        PY_API_HASH: ${PY_API_HASH}
+        PY_PHONE_NUMBER: ${PY_PHONE_NUMBER}
+        PY_CHANNEL_USERNAME: ${PY_CHANNEL_USERNAME}
+        PY_DATABASE_URL: ${PY_DATABASE_URL}
+      dockerfile: Dockerfile
+
+
+  
