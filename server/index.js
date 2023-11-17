@@ -12,7 +12,7 @@ dotenv.config({path:'../.env'});
 app.use(bodyParser());
 app.use(router.routes());
 
-const port = process.env.SERVER_PORT;
+const port = process.env.SERVER_PORT || "3003";
 const host = process.env.SERVER_HOST;
 
 app.listen(port,host, () => {  //  This is a host for server to be connected from any local network address
