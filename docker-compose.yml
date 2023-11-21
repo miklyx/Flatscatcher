@@ -3,6 +3,7 @@ version: '3.9'
 services:
   database-flathunter:
     image: postgres:15
+    platform: linux/amd64
     ports:
       - 5432:5432
     volumes:
