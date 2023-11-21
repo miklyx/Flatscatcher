@@ -1,0 +1,1 @@
+CREATE UNIQUE INDEX last_message24_pkey ON public.last_message24 USING btree (id)
