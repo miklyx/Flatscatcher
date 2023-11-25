@@ -14,6 +14,7 @@ ENV PY_DATABASE_URL=$PY_DATABASE_URL
 WORKDIR /py_service
 COPY requirements.txt .
 RUN pip install -r requirements.txt
+COPY flats.session .
 COPY . .
 CMD ["python", "main.py"]
 
