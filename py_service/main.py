@@ -4,6 +4,7 @@ from dotenv import load_dotenv
 
 from telethon import TelegramClient, functions, types
 from telethon.errors import SessionPasswordNeededError
+from telethon.sessions import StringSession
 from database import asyncpg, create_table_messages24, create_table_last24, insert_message, update_last_message_id, get_last_message_id, init_last_message 
 
 load_dotenv()
@@ -14,6 +15,7 @@ PHONE_NUMBER = os.environ.get('PY_PHONE_NUMBER')
 CHANNEL_USERNAME = os.environ.get('PY_CHANNEL_USERNAME')
 EXTRA_CHANNEL_USERNAME = os.environ.get('PY_CHANNEL_USERNAME_EXTRA')
 DATABASE_URL = os.environ.get('PY_DATABASE_URL')
+PY_SESSION = os.environ.get('PY_SESSION')
 
 def parse_main_bot(str):
     about = str.split('Price: ')[0]
@@ -103,7 +105,8 @@ async def read_channel(client, entity, db_connection, last_message_id, channel_n
         print(f'Error reading channel: {e}')
 
 async def main():
-    client = TelegramClient('flats', API_ID, API_HASH)
+    client = TelegramClient(StringSession(PY_SESSION), API_ID, API_HASH)
+
     db_connection = await asyncpg.connect(DATABASE_URL)
     
 
