@@ -129,7 +129,7 @@ async def main():
         while True:
             await asyncio.gather(
                 read_channel(client, entity, db_connection, last_message_id, CHANNEL_USERNAME, lock),
-                read_channel(client, entity_extra, db_connection, last_message_extra_id, EXTRA_CHANNEL_USERNAME, lock)
+                #read_channel(client, entity_extra, db_connection, last_message_extra_id, EXTRA_CHANNEL_USERNAME, lock)
             )
             last_message_id = await get_last_message_id(db_connection, CHANNEL_USERNAME)
             last_message_extra_id = await get_last_message_id(db_connection, EXTRA_CHANNEL_USERNAME)
