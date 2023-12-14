@@ -58,6 +58,7 @@ async def insert_message(connection, id,img,url,title,prc,sz,rm,addr,crw,fr,to,i
 async def get_last_message_id(connection, channel):
     query = "SELECT message_id FROM last_message24 where channel=$1;"
     result = await connection.fetchval(query, channel)
+    #result = await connection.execute(query, channel)
     return result if result is not None else 0
 
 async def update_last_message_id(connection, message_id, channel):
