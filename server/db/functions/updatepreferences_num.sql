@@ -24,5 +24,4 @@ AS $function$
 			select flatsmeta.id as flat_id, flatsmeta.preferred 
 			from flatsmeta;
 	END;
-$function$
-;
+

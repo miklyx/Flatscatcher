@@ -27,7 +27,7 @@ services:
       dockerfile: Dockerfile
 
   py-service:
-    image: py_service
+    image: py-service
     depends_on:
       - database-flathunter
     volumes:
@@ -38,6 +38,8 @@ services:
       - PY_PHONE_NUMBER=${PY_PHONE_NUMBER}
       - PY_CHANNEL_USERNAME=${PY_CHANNEL_USERNAME}
       - PY_DATABASE_URL=${PY_DATABASE_URL}
+      - REDIS_PWD=${REDIS_PWD}
+      - REDIS_HOST=${REDIS_HOST}
     build:
       args:
         PY_API_ID: ${PY_API_ID}
@@ -45,6 +47,8 @@ services:
         PY_PHONE_NUMBER: ${PY_PHONE_NUMBER}
         PY_CHANNEL_USERNAME: ${PY_CHANNEL_USERNAME}
         PY_DATABASE_URL: ${PY_DATABASE_URL}
+        REDIS_HOST: ${REDIS_HOST}
+        REDIS_PWD: ${REDIS_PWD}
       dockerfile: Dockerfile
 
 

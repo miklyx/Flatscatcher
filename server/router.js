@@ -11,6 +11,10 @@ const profileMeta = require('./controllers/profileMeta.js');
 
 
 router.get('/flats', flats.getAll);   //get all flats
+router.get('/flats24', flats.getAll24);   //get all flats - new one
+router.get('/flatsSorted', flats.getAllSorted24);   //get all hot flats from redis
+
+
 router.get('/stats', flatsMeta.getStats);   //get user's statistics
 
 
